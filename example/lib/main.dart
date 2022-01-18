@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-import 'dart:ui' as ui show Image;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart' as widgets show Image;
 
@@ -83,17 +80,8 @@ class _PageState extends State<Page> {
       return Text(data ? 'YES' : 'NO');
     }
 
-    if (data is ui.Image) {
-      return _buildFuture(data.toByteData());
-    }
-
     if (data is widgets.Image) {
       return data;
-    }
-
-    if (data is ByteData) {
-      // \todo return Image.memory(data.buffer.asUint8List());
-      throw UnimplementedError;
     }
 
     if (data is String) {

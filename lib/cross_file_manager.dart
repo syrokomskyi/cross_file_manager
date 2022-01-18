@@ -1,12 +1,14 @@
 library cross_file_manager;
 
 import 'dart:async' show Completer;
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/widgets.dart' as widgets;
+import 'package:path_provider/path_provider.dart';
 
 class CrossFileManager {
   final List<Loader> loaders;
@@ -23,9 +25,9 @@ class CrossFileManager {
     return false;
   }
 
-  Future<ui.Image?> loadImage(String path) async {
+  Future<File?> loadFile(String path) async {
     for (final loader in loaders) {
-      final r = await loader.loadImage(path);
+      final r = await loader.loadFile(path);
       if (r != null) {
         return r;
       }
@@ -82,14 +84,9 @@ abstract class Loader {
 
   Future<bool> exists(String path);
 
+  Future<File?> loadFile(String path);
+
   Future<String?> loadString(String path);
-
-  Future<Uint8List?> loadBytes(String path);
-
-  Future<ui.Image?> loadImage(String path) async {
-    final bytes = await loadBytes(path);
-    return bytes == null ? null : convertBytesToImage(bytes);
-  }
 
   Future<widgets.Image?> loadImageWidget(
     String path, {
@@ -124,9 +121,14 @@ class AssetsLoader extends Loader {
   }
 
   @override
-  Future<Uint8List?> loadBytes(String path) async {
-    final data = await rootBundle.load(path);
-    return Uint8List.view(data.buffer);
+  Future<File?> loadFile(String path) async {
+    final bytes = await rootBundle.load(path);
+    final file = File('${(await getTemporaryDirectory()).path}/$path');
+    final prepared =
+        bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
+    await file.writeAsBytes(prepared);
+
+    return file;
   }
 
   @override
