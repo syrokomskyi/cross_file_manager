@@ -1,5 +1,6 @@
-name: example
+name: example_cross_file_manager
 description: An example for CrossFileManager.
+homepage: https://github.com/signmotion/cross_file_manager
 
 version: 0.1.0+100
 
