@@ -46,35 +46,20 @@ class _PageState extends State<Page> {
         ),
       );
 
-  List<Widget> gettingString(String title, String path) {
-    final content = fm.loadString(path);
+  List<Widget> gettingString(String title, String path) =>
+      view(title, path, fm.loadString(path));
 
-    return [
-      Text(title, textScaleFactor: 2),
-      Text(path),
-      _buildFuture(content),
-    ];
-  }
+  List<Widget> gettingImageWidget(String title, String path) =>
+      view(title, path, fm.loadImageWidget(path, width: screenWidth / 3));
 
-  List<Widget> gettingImageWidget(String title, String path) {
-    final content = fm.loadImageWidget(path, width: screenWidth / 3);
+  List<Widget> gettingExists(String title, String path) =>
+      view(title, path, fm.exists(path));
 
-    return [
-      Text(title, textScaleFactor: 2),
-      Text(path),
-      _buildFuture(content),
-    ];
-  }
-
-  List<Widget> gettingExists(String title, String path) {
-    final content = fm.exists(path);
-
-    return [
-      Text(title, textScaleFactor: 2),
-      Text(path),
-      _buildFuture(content),
-    ];
-  }
+  List<Widget> view(String title, String path, dynamic data) => [
+        Text(title, textScaleFactor: 2),
+        Text(path),
+        _buildFuture(data),
+      ];
 
   Widget _buildFuture(Future<dynamic> future) => FutureBuilder<dynamic>(
       future: future,
