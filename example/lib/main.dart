@@ -36,10 +36,12 @@ class _PageState extends State<Page> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ...gettingString('String', 'assets/a/aim.json'),
-            //const Divider(),
-            //...gettingFrom('assets/a/non_exists.file'),
             const Divider(),
             ...gettingImageWidget('Image', 'assets/a/elements/1/bird.webp'),
+            const Divider(),
+            ...gettingExists('Exists', 'assets/a/non_exists.file'),
+            const Divider(),
+            ...gettingExists('Exists', 'assets/a/aim.json'),
           ],
         ),
       );
@@ -56,6 +58,16 @@ class _PageState extends State<Page> {
 
   List<Widget> gettingImageWidget(String title, String path) {
     final content = fm.loadImageWidget(path, width: screenWidth / 3);
+
+    return [
+      Text(title, textScaleFactor: 2),
+      Text(path),
+      _buildFuture(content),
+    ];
+  }
+
+  List<Widget> gettingExists(String title, String path) {
+    final content = fm.exists(path);
 
     return [
       Text(title, textScaleFactor: 2),
@@ -83,7 +95,7 @@ class _PageState extends State<Page> {
     }
 
     if (data is bool) {
-      return Text(data.toString());
+      return Text(data ? 'YES' : 'NO');
     }
 
     if (data is ui.Image) {
