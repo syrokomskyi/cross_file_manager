@@ -1,6 +1,8 @@
-import 'dart:ui' as ui;
+import 'dart:typed_data';
+import 'dart:ui' as ui show Image;
 
-import 'package:flutter/material.dart' hide Image;
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart' as widgets show Image;
 
 import 'package:cross_file_manager/cross_file_manager.dart';
 
@@ -25,60 +27,84 @@ class Page extends StatefulWidget {
 }
 
 class _PageState extends State<Page> {
+  AssetCrossFileManager get fm => AssetCrossFileManager();
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Table(
-          columnWidths: const <int, TableColumnWidth>{
-            0: IntrinsicColumnWidth(),
-            1: IntrinsicColumnWidth(),
-          },
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          children: <TableRow>[
-            const TableRow(
-              children: <Widget>[
-                Text('Path in assets'),
-                Text(''),
-              ],
-            ),
-            gettingFrom('assets/a/aim.json'),
-            gettingFrom('assets/a/non_exists.file'),
-            gettingFrom('assets/elements/1/bird.webp'),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(title: const Text('Priority File Detection')),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ...gettingString('String', 'assets/a/aim.json'),
+            //const Divider(),
+            //...gettingFrom('assets/a/non_exists.file'),
+            const Divider(),
+            ...gettingImageWidget('Image', 'assets/a/elements/1/bird.webp'),
           ],
         ),
-      ),
-    );
+      );
+
+  List<Widget> gettingString(String title, String path) {
+    final content = fm.loadString(path);
+
+    return [
+      Text(title, textScaleFactor: 2),
+      Text(path),
+      _buildFuture(content),
+    ];
   }
 
-  TableRow gettingFrom(String path) {
-    final fm = AssetCrossFileManager();
+  List<Widget> gettingImageWidget(String title, String path) {
+    final content = fm.loadImageWidget(path, width: screenWidth / 3);
 
-    final exists = fm.exists(path);
-
-    return TableRow(
-      children: <Widget>[
-        Text(path),
-        _buildFuture(exists),
-      ],
-    );
+    return [
+      Text(title, textScaleFactor: 2),
+      Text(path),
+      _buildFuture(content),
+    ];
   }
 
   Widget _buildFuture(Future<dynamic> future) => FutureBuilder<dynamic>(
-        future: future,
-        builder: (_, snapshot) =>
-            snapshot.hasData ? _buildData(snapshot.data!) : Container(),
-      );
+      future: future,
+      builder: (_, snapshot) {
+        if (snapshot.hasError) {
+          return Text(
+            snapshot.error.toString(),
+            style: const TextStyle(color: Colors.redAccent),
+          );
+        }
+
+        return snapshot.hasData ? _buildData(snapshot.data!) : Container();
+      });
 
   Widget _buildData(dynamic data) {
+    if (data == null) {
+      return const Text('NULL');
+    }
+
     if (data is bool) {
-      return Text(data ? 'OK' : '-', textAlign: TextAlign.center);
+      return Text(data.toString());
     }
 
     if (data is ui.Image) {
-      //return ui.Image.memory(image: data);
+      return _buildFuture(data.toByteData());
     }
 
-    return const Text('UNDEFINED', textAlign: TextAlign.center);
+    if (data is widgets.Image) {
+      return data;
+    }
+
+    if (data is ByteData) {
+      // \todo return Image.memory(data.buffer.asUint8List());
+      throw UnimplementedError;
+    }
+
+    if (data is String) {
+      return Text(data);
+    }
+
+    return Text('Unrecognized `$data`');
   }
+
+  double get screenWidth => MediaQuery.of(context).size.width;
 }

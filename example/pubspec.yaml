@@ -29,3 +29,5 @@ flutter:
     - assets/
     - assets/a/
     - assets/a/elements/
+    - assets/a/elements/1/
+    - assets/a/elements/1/owl/

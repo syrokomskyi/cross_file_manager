@@ -6,6 +6,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/widgets.dart' as widgets;
 
 class CrossFileManager {
   final List<Loader> loaders;
@@ -25,6 +26,38 @@ class CrossFileManager {
   Future<ui.Image?> loadImage(String path) async {
     for (final loader in loaders) {
       final r = await loader.loadImage(path);
+      if (r != null) {
+        return r;
+      }
+    }
+
+    return null;
+  }
+
+  Future<widgets.Image?> loadImageWidget(
+    String path, {
+    double? width,
+    double? height,
+    widgets.BoxFit? fit,
+  }) async {
+    for (final loader in loaders) {
+      final r = await loader.loadImageWidget(
+        path,
+        width: width,
+        height: height,
+        fit: fit,
+      );
+      if (r != null) {
+        return r;
+      }
+    }
+
+    return null;
+  }
+
+  Future<String?> loadString(String path) async {
+    for (final loader in loaders) {
+      final r = await loader.loadString(path);
       if (r != null) {
         return r;
       }
@@ -58,6 +91,13 @@ abstract class Loader {
     return bytes == null ? null : convertBytesToImage(bytes);
   }
 
+  Future<widgets.Image?> loadImageWidget(
+    String path, {
+    double? width,
+    double? height,
+    widgets.BoxFit? fit,
+  });
+
   @protected
   static Future<ui.Image> convertBytesToImage(Uint8List bytes) {
     final completer = Completer<ui.Image>();
@@ -71,7 +111,10 @@ class AssetsLoader extends Loader {
 
   @override
   Future<bool> exists(String path) async {
-    assert(path.isNotEmpty);
+    if (path.isEmpty) {
+      return false;
+    }
+
     try {
       await rootBundle.load(path);
       return true;
@@ -81,11 +124,30 @@ class AssetsLoader extends Loader {
   }
 
   @override
-  Future<String?> loadString(String path) => rootBundle.loadString(path);
-
-  @override
   Future<Uint8List?> loadBytes(String path) async {
     final data = await rootBundle.load(path);
     return Uint8List.view(data.buffer);
   }
+
+  @override
+  Future<widgets.Image?> loadImageWidget(
+    String path, {
+    double? width,
+    double? height,
+    widgets.BoxFit? fit,
+  }) async {
+    try {
+      return widgets.Image.asset(
+        path,
+        width: width,
+        height: height,
+        fit: fit,
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Future<String?> loadString(String path) async => rootBundle.loadString(path);
 }
