@@ -1,0 +1,30 @@
+name: example
+description: An example for CrossFileManager.
+
+version: 0.1.0+100
+
+publish_to: none
+
+environment:
+  flutter: '>=2.8.1 <3.0.0'
+  sdk: '>=2.15.1 <3.0.0'
+
+dependencies:
+  collection: ^1.15.0
+  cross_file_manager:
+    path: ../
+  cupertino_icons: ^1.0.4
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^1.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/a/
+    - assets/a/elements/
