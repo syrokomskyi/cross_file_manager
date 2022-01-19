@@ -29,14 +29,18 @@ class _PageState extends State<Page> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: const Text('Priority File Detection')),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ...gettingString('String', 'assets/a/aim.json'),
-            ...gettingImageWidget('Image', 'assets/a/elements/1/bird.webp'),
-            ...gettingExists('Exists', 'assets/a/non_exists.file'),
-            ...gettingExists('Exists', 'assets/a/aim.json'),
-          ],
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ...gettingString('string', 'assets/aim.json'),
+                ...gettingImageWidget('webp', 'assets/1/bird.webp'),
+                ...gettingImageWidget('png', 'assets/1/fox.png'),
+                ...gettingImageWidget('jpg', 'assets/1/whale.jpg'),
+                ...gettingExists('exists', 'assets/non_exists.file'),
+                ...gettingExists('exists', 'assets/aim.json'),
+              ]..removeLast()),
         ),
       );
 

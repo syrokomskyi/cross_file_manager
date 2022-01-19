@@ -26,7 +26,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/a/
-    - assets/a/elements/
-    - assets/a/elements/1/
-    - assets/a/elements/1/owl/
+    - assets/1/
+    - assets/1/deer/
+    - assets/1/owl/
