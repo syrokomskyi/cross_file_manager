@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/widgets.dart' as widgets;
-import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
 
 import 'loader.dart';
 
@@ -11,9 +11,7 @@ class PlainAssetsLoader extends Loader {
 
   @override
   Future<bool> exists(String path) async {
-    if (path.isEmpty) {
-      return false;
-    }
+    assert(path.isNotEmpty);
 
     try {
       await rootBundle.load(path);
@@ -25,10 +23,20 @@ class PlainAssetsLoader extends Loader {
 
   @override
   Future<File?> loadFile(String path) async {
+    assert(path.isNotEmpty);
+
+    if (await notExists(path)) {
+      return null;
+    }
+
     final bytes = await rootBundle.load(path);
-    final file = File('${(await getTemporaryDirectory()).path}/$path');
+
+    final pathToFile = p.join(await localPath, path);
+    final file = File(pathToFile);
     final prepared =
         bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
+    final dir = p.dirname(pathToFile);
+    Directory(dir).createSync(recursive: true);
     await file.writeAsBytes(prepared);
 
     return file;
@@ -41,18 +49,22 @@ class PlainAssetsLoader extends Loader {
     double? height,
     widgets.BoxFit? fit,
   }) async {
-    try {
-      return widgets.Image.asset(
-        path,
-        width: width,
-        height: height,
-        fit: fit,
-      );
-    } catch (_) {
-      return null;
-    }
+    assert(path.isNotEmpty);
+
+    return await exists(path)
+        ? widgets.Image.asset(
+            path,
+            width: width,
+            height: height,
+            fit: fit,
+          )
+        : null;
   }
 
   @override
-  Future<String?> loadString(String path) async => rootBundle.loadString(path);
+  Future<String?> loadString(String path) async {
+    assert(path.isNotEmpty);
+
+    return await exists(path) ? rootBundle.loadString(path) : null;
+  }
 }

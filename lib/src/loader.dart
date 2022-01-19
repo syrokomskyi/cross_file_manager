@@ -3,13 +3,31 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 abstract class Loader {
   const Loader();
 
+  static const temporaryFolder = 'cfm';
+
+  /// \see [clearCache]
+  Future<String> get localPath async {
+    final tempDir = await getTemporaryDirectory();
+    final path = p.join(tempDir.path, temporaryFolder);
+    if (!File(path).existsSync()) {
+      Directory(path).createSync(recursive: true);
+    }
+
+    return path;
+  }
+
   Future<bool> exists(String path);
+
+  Future<bool> notExists(String path) async => !(await exists(path));
 
   Future<File?> loadFile(String path);
 
@@ -21,6 +39,14 @@ abstract class Loader {
     double? height,
     widgets.BoxFit? fit,
   });
+
+  /// \see [localPath]
+  Future<void> clearCache() async {
+    final dir = Directory(await localPath);
+    if (dir.existsSync()) {
+      await dir.delete(recursive: true);
+    }
+  }
 
   @protected
   static Future<ui.Image> convertBytesToImage(Uint8List bytes) {

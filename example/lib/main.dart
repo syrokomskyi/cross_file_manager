@@ -26,6 +26,13 @@ class _PageState extends State<Page> {
   AssetCrossFileManager get fm => AssetCrossFileManager();
 
   @override
+  void initState() {
+    super.initState();
+
+    fm.clearCache();
+  }
+
+  @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: const Text('Priority File Detection')),
         body: SingleChildScrollView(
@@ -50,6 +57,7 @@ class _PageState extends State<Page> {
         ...gettingExists('exists', 'assets/1/owl/owl.json'),
       ]..removeLast();
 
+  /// Extract from zip-files.
   List<Widget> get zipPathDemo => [
         ...subtitle('zip path'),
         ...gettingString('string', 'assets/2/owl/owl.json'),

@@ -61,4 +61,7 @@ class CrossFileManager {
 
     return null;
   }
+
+  Future<void> clearCache() async =>
+      loaders.forEach((loader) => loader.clearCache());
 }
