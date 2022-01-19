@@ -76,7 +76,7 @@ class AssetCrossFileManager extends CrossFileManager {
     return _instance;
   }
 
-  AssetCrossFileManager._() : super(loaders: const [AssetsLoader()]);
+  AssetCrossFileManager._() : super(loaders: const [PlainAssetsLoader()]);
 }
 
 abstract class Loader {
@@ -103,8 +103,8 @@ abstract class Loader {
   }
 }
 
-class AssetsLoader extends Loader {
-  const AssetsLoader();
+class PlainAssetsLoader extends Loader {
+  const PlainAssetsLoader();
 
   @override
   Future<bool> exists(String path) async {
