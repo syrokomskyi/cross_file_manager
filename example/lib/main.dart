@@ -32,17 +32,40 @@ class _PageState extends State<Page> {
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ...gettingString('string', 'assets/aim.json'),
-                ...gettingImageWidget('webp', 'assets/1/bird.webp'),
-                ...gettingImageWidget('png', 'assets/1/fox.png'),
-                ...gettingImageWidget('jpg', 'assets/1/whale.jpg'),
-                ...gettingExists('exists', 'assets/non_exists.file'),
-                ...gettingExists('exists', 'assets/aim.json'),
-              ]..removeLast()),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ...plainPathDemo,
+              ...zipPathDemo,
+            ],
+          ),
         ),
       );
+
+  List<Widget> get plainPathDemo => [
+        ...subtitle('plain path'),
+        ...gettingString('string', 'assets/1/owl/owl.json'),
+        ...gettingImageWidget('webp', 'assets/1/bird.webp'),
+        ...gettingImageWidget('png', 'assets/1/fox.png'),
+        ...gettingImageWidget('jpg', 'assets/1/whale.jpg'),
+        ...gettingExists('exists', 'assets/1/non_exists.file'),
+        ...gettingExists('exists', 'assets/1/owl/owl.json'),
+      ]..removeLast();
+
+  List<Widget> get zipPathDemo => [
+        ...subtitle('zip path'),
+        ...gettingString('string', 'assets/2/owl/owl.json'),
+        ...gettingImageWidget('webp', 'assets/2/bird.webp'),
+        ...gettingImageWidget('png', 'assets/2/fox.png'),
+        ...gettingImageWidget('jpg', 'assets/2/whale.jpg'),
+        ...gettingExists('exists', 'assets/2/non_exists.file'),
+        ...gettingExists('exists', 'assets/2/owl/owl.json'),
+      ]..removeLast();
+
+  List<Widget> subtitle(String text) => [
+        subtitleDivider,
+        Text(text, textScaleFactor: 2),
+        subtitleDivider,
+      ];
 
   List<Widget> gettingString(String title, String path) =>
       view(title, path, fm.loadString(path));
@@ -54,10 +77,10 @@ class _PageState extends State<Page> {
       view(title, path, fm.exists(path));
 
   List<Widget> view(String title, String path, dynamic data) => [
-        Text(title, textScaleFactor: 2),
+        Text(title, textScaleFactor: 1.5),
         Text(path),
         _buildFuture(data),
-        const Divider(),
+        cellDivider,
       ];
 
   Widget _buildFuture(Future<dynamic> future) => FutureBuilder<dynamic>(
@@ -94,4 +117,9 @@ class _PageState extends State<Page> {
   }
 
   double get screenWidth => MediaQuery.of(context).size.width;
+
+  static const Widget subtitleDivider =
+      Divider(height: 30, color: Colors.black);
+
+  static const Widget cellDivider = Divider();
 }
