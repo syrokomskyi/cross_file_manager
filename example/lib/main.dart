@@ -60,12 +60,12 @@ class _PageState extends State<Page> {
   /// Extract from zip-files.
   List<Widget> get zipPathDemo => [
         ...subtitle('zip path'),
-        ...gettingString('string', 'assets/2/owl/owl.json'),
-        ...gettingImageWidget('webp', 'assets/2/bird.webp'),
-        ...gettingImageWidget('png', 'assets/2/fox.png'),
-        ...gettingImageWidget('jpg', 'assets/2/whale.jpg'),
-        ...gettingExists('exists', 'assets/2/non_exists.file'),
-        ...gettingExists('exists', 'assets/2/owl/owl.json'),
+        ...gettingString('string', 'assets/2/owl/owl.json', archive: '2'),
+        ...gettingImageWidget('webp', 'assets/2/bird.webp', archive: '2'),
+        ...gettingImageWidget('png', 'assets/2/fox.png', archive: '2'),
+        ...gettingImageWidget('jpg', 'assets/2/whale.jpg', archive: '2'),
+        ...gettingExists('exists', 'assets/2/non_exists.file', archive: '2'),
+        ...gettingExists('exists', 'assets/2/owl/owl.json', archive: '2'),
       ]..removeLast();
 
   List<Widget> subtitle(String text) => [
@@ -74,18 +74,53 @@ class _PageState extends State<Page> {
         subtitleDivider,
       ];
 
-  List<Widget> gettingString(String title, String path) =>
-      view(title, path, fm.loadString(path));
+  List<Widget> gettingString(
+    String title,
+    String path, {
+    String archive = '',
+  }) =>
+      view(
+        title,
+        path,
+        fm.loadString(path),
+        archive: archive,
+      );
 
-  List<Widget> gettingImageWidget(String title, String path) =>
-      view(title, path, fm.loadImageWidget(path, width: screenWidth / 3));
+  List<Widget> gettingImageWidget(
+    String title,
+    String path, {
+    String archive = '',
+  }) =>
+      view(
+        title,
+        path,
+        fm.loadImageWidget(path, width: screenWidth / 3),
+        archive: archive,
+      );
 
-  List<Widget> gettingExists(String title, String path) =>
-      view(title, path, fm.exists(path));
+  List<Widget> gettingExists(
+    String title,
+    String path, {
+    String archive = '',
+  }) =>
+      view(
+        title,
+        path,
+        fm.exists(path),
+        archive: archive,
+      );
 
-  List<Widget> view(String title, String path, dynamic data) => [
+  List<Widget> view(
+    String title,
+    String path,
+    dynamic data, {
+    String archive = '',
+  }) =>
+      [
         Text(title, textScaleFactor: 1.5),
-        Text(path),
+        Text(archive.isEmpty
+            ? path
+            : path.replaceFirst(archive, '$archive.zip')),
         _buildFuture(data),
         cellDivider,
       ];
