@@ -7,6 +7,8 @@ import 'package:path/path.dart' as p;
 import 'loader.dart';
 import 'plain_assets_loader.dart';
 
+/// \warning Some files from ultra compression tools (for ex., 7Zip)
+/// doesn't extract correctly.
 class ZipAssetsLoader extends Loader {
   const ZipAssetsLoader();
 
