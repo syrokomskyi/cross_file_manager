@@ -1,7 +1,6 @@
+import 'package:cross_file_manager/cross_file_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart' as widgets show Image;
-
-import 'package:cross_file_manager/cross_file_manager.dart';
 
 void main() => runApp(const App());
 
