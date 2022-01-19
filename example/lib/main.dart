@@ -33,11 +33,8 @@ class _PageState extends State<Page> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ...gettingString('String', 'assets/a/aim.json'),
-            const Divider(),
             ...gettingImageWidget('Image', 'assets/a/elements/1/bird.webp'),
-            const Divider(),
             ...gettingExists('Exists', 'assets/a/non_exists.file'),
-            const Divider(),
             ...gettingExists('Exists', 'assets/a/aim.json'),
           ],
         ),
@@ -56,6 +53,7 @@ class _PageState extends State<Page> {
         Text(title, textScaleFactor: 2),
         Text(path),
         _buildFuture(data),
+        const Divider(),
       ];
 
   Widget _buildFuture(Future<dynamic> future) => FutureBuilder<dynamic>(
