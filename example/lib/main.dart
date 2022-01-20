@@ -1,5 +1,6 @@
 import 'package:cross_file_manager/cross_file_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart' as widgets show Image;
 
 void main() => runApp(const App());
@@ -29,6 +30,13 @@ class _PageState extends State<Page> {
   void initState() {
     super.initState();
 
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft
+    ]);
+
     fm.clearCache();
   }
 
@@ -52,42 +60,36 @@ class _PageState extends State<Page> {
   /// \see [AppCrossFileManager] with [PlainAssetsLoader]
   List<Widget> get plainAssetsDemo => [
         ...subtitle('plain assets path'),
-        ...gettingString('string', 'assets/1/owl/owl.json'),
-        ...gettingImageWidget('webp', 'assets/1/bird.webp'),
-        ...gettingImageWidget('png', 'assets/1/fox.png'),
-        ...gettingImageWidget('jpg', 'assets/1/whale.jpg'),
-        ...gettingExists('exists', 'assets/1/non_exists.file'),
-        ...gettingExists('exists', 'assets/1/owl/owl.json'),
-      ]..removeLast();
+        ...getting(),
+      ];
 
   /// Extract from zip-files.
   /// \see [AppCrossFileManager] with [ZipAssetsLoader]
   List<Widget> get zipAssetsDemo => [
         ...subtitle('zip assets path'),
-        ...gettingString('string', 'assets/2/owl/owl.json', archive: '2'),
-        ...gettingImageWidget('webp', 'assets/2/bird.webp', archive: '2'),
-        ...gettingImageWidget('png', 'assets/2/fox.png', archive: '2'),
-        ...gettingImageWidget('jpg', 'assets/2/whale.jpg', archive: '2'),
-        ...gettingExists('exists', 'assets/2/non_exists.file', archive: '2'),
-        ...gettingExists('exists', 'assets/2/owl/owl.json', archive: '2'),
-      ]..removeLast();
+        ...getting(archive: '2'),
+      ];
 
   /// Download from Internet.
   /// \see [AppCrossFileManager] with [UrlLoader]
   List<Widget> get urlDemo => [
         ...subtitle('url plain path'),
-        ...gettingString('string', 'assets/1/owl/owl.json'),
-        ...gettingImageWidget('webp', 'assets/1/bird.webp'),
-        ...gettingImageWidget('png', 'assets/1/fox.png'),
-        ...gettingImageWidget('jpg', 'assets/1/whale.jpg'),
-        ...gettingExists('exists', 'assets/1/non_exists.file'),
-        ...gettingExists('exists', 'assets/1/owl/owl.json'),
-      ]..removeLast();
+        ...getting(),
+      ];
 
   List<Widget> subtitle(String text) => [
         Padding(padding: EdgeInsets.all(appMagicSize / 2)),
         Text(text, textScaleFactor: 2),
         subtitleDivider,
+      ];
+
+  List<Widget> getting({String archive = ''}) => [
+        ...gettingString('string', 'assets/1/owl/owl.json', archive: archive),
+        ...gettingImageWidget('webp', 'assets/1/bird.webp', archive: archive),
+        ...gettingImageWidget('png', 'assets/1/fox.png', archive: archive),
+        ...gettingImageWidget('jpg', 'assets/1/whale.jpg', archive: archive),
+        ...gettingExists('exists', 'assets/1/non_exists.txt', archive: archive),
+        ...gettingExists('exists', 'assets/1/owl/owl.json', archive: archive),
       ];
 
   List<Widget> gettingString(
