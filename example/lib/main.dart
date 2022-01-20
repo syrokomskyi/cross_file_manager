@@ -1,6 +1,5 @@
 import 'package:cross_file_manager/cross_file_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart' as widgets show Image;
 
 void main() => runApp(const App());
@@ -29,13 +28,6 @@ class _PageState extends State<Page> {
   @override
   void initState() {
     super.initState();
-
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft
-    ]);
 
     fm.clearCache();
   }
