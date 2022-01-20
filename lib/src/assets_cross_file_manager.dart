@@ -3,7 +3,7 @@ import 'plain_assets_loader.dart';
 import 'zip_assets_loader.dart';
 
 class AssetCrossFileManager extends CrossFileManager {
-  static final AssetCrossFileManager _instance = AssetCrossFileManager._();
+  static final _instance = AssetCrossFileManager._();
 
   factory AssetCrossFileManager() {
     return _instance;

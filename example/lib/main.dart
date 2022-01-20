@@ -243,7 +243,7 @@ const url =
     'https://raw.githubusercontent.com/signmotion/cross_file_manager/master/example/';
 
 class AppCrossFileManager extends CrossFileManager {
-  static final AppCrossFileManager _instance = AppCrossFileManager._();
+  static final _instance = AppCrossFileManager._();
 
   factory AppCrossFileManager() {
     return _instance;
