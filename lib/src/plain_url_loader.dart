@@ -3,13 +3,14 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:path/path.dart' as p;
 
 import 'loader.dart';
 
 class PlainUrlLoader extends Loader {
   final String base;
 
-  String url(String path) => '$base/$path';
+  String url(String path) => p.join(base, path);
 
   const PlainUrlLoader({required this.base}) : assert(base.length > 0);
 

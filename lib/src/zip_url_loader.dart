@@ -5,18 +5,29 @@ import 'package:flutter/widgets.dart' as widgets;
 import 'package:path/path.dart' as p;
 
 import 'loader.dart';
-import 'plain_assets_loader.dart';
+import 'plain_url_loader.dart';
 
-/// \warning Some files from ultra compression tools (for ex., 7Zip)
-/// doesn't extract correctly.
-class ZipAssetsLoader extends Loader {
-  const ZipAssetsLoader();
+class ZipUrlLoader extends Loader {
+  final String base;
+
+  @override
+  String get temporaryFolder => '${super.temporaryFolder}/zipurl';
+
+  String url(String path) => p.join(base, path);
+
+  const ZipUrlLoader({required this.base}) : assert(base.length > 0);
 
   @override
   Future<bool> exists(String path) async {
     assert(path.isNotEmpty);
 
-    final file = await loadFile(path);
+    late final File? file;
+    try {
+      file = await loadFile(path);
+    } on HttpException {
+      // it's OK: a state can be 404 or any
+      file = null;
+    }
 
     return file?.existsSync() ?? false;
   }
@@ -25,26 +36,33 @@ class ZipAssetsLoader extends Loader {
   Future<File?> loadFile(String path) async {
     assert(path.isNotEmpty);
 
+    /* \todo Add `loadFileStream()`.
+    cacheManager.getFileStream(
+      pathWithBase(path),
+      withProgress: true,
+    );
+    */
+
     print('loadFile path `$path`');
 
-    // direct verify into the local path (was copied below)
+    // direct verify into the url path (was copied below)
     final localPathToFile = p.join(await localPath, path);
     var file = File(localPathToFile);
     if (file.existsSync()) {
       return file;
     }
 
-    // decompose the path and extract the file from archive
-    // look at any zip file into the assets
+    // decompose the path, download and extract the file from archive
+    // look at any zip file into the url
     final splits = p.split(p.withoutExtension(path));
     File? foundFile;
     late String subPath;
     for (var i = splits.length - 1; i >= 0; --i) {
       final subSplits = splits.sublist(0, i);
       subPath = '${p.joinAll(subSplits)}.zip';
-      print('subPath `$subPath`, look into the assets');
-      if (await _plainAssetsLoader.exists(subPath)) {
-        final subFile = await _plainAssetsLoader.loadFile(subPath);
+      print('subPath `$subPath`, look into the url');
+      if (await _plainUrlLoader.exists(subPath)) {
+        final subFile = await _plainUrlLoader.loadFile(subPath);
         print('subFile from assets `$subFile`');
         if (subFile?.existsSync() ?? false) {
           foundFile = subFile;
@@ -116,5 +134,5 @@ class ZipAssetsLoader extends Loader {
     return file?.readAsStringSync();
   }
 
-  static const _plainAssetsLoader = PlainAssetsLoader();
+  PlainUrlLoader get _plainUrlLoader => PlainUrlLoader(base: base);
 }

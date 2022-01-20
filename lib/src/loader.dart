@@ -13,9 +13,12 @@ import 'package:path_provider/path_provider.dart';
 abstract class Loader {
   const Loader();
 
-  static const temporaryFolder = 'cfm';
+  /// Overwrite this when a custom loader using a cache.
+  /// \see [clearCache]
+  String get temporaryFolder => 'cfm';
 
   /// \see [clearCache]
+  /// \see [temporaryFolder]
   Future<String> get localPath async {
     final tempDir = await getTemporaryDirectory();
     final path = p.join(tempDir.path, temporaryFolder);
@@ -44,6 +47,7 @@ abstract class Loader {
   });
 
   /// \see [localPath]
+  /// \see [temporaryFolder]
   Future<void> clearCache() async {
     final dir = Directory(await localPath);
     if (dir.existsSync()) {

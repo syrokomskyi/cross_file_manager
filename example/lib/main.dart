@@ -40,9 +40,10 @@ class _PageState extends State<Page> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ...plainAssetsDemo,
-              ...zipAssetsDemo,
-              ...plainUrlDemo,
+              //...plainAssetsDemo,
+              //...zipAssetsDemo,
+              //...plainUrlDemo,
+              ...zipUrlDemo,
             ]..removeAt(0),
           ),
         ),
@@ -52,21 +53,28 @@ class _PageState extends State<Page> {
   /// \see [AppCrossFileManager] with [PlainAssetsLoader]
   List<Widget> get plainAssetsDemo => [
         ...subtitle('plain assets path'),
-        ...getting(),
+        ...gettingPlain(),
       ];
 
   /// Extract from zip-files.
   /// \see [AppCrossFileManager] with [ZipAssetsLoader]
   List<Widget> get zipAssetsDemo => [
         ...subtitle('zip assets path'),
-        ...getting(archive: '2'),
+        ...gettingArchive('2'),
       ];
 
   /// Download from Internet.
   /// \see [AppCrossFileManager] with [PlainUrlLoader]
   List<Widget> get plainUrlDemo => [
         ...subtitle('plain url path'),
-        ...getting(),
+        ...gettingPlain(),
+      ];
+
+  /// Download from Internet a preferred zip-file and extract requested file from it.
+  /// \see [AppCrossFileManager] with [ZipUrlLoader]
+  List<Widget> get zipUrlDemo => [
+        ...subtitle('zip url path'),
+        ...gettingArchive('2', loaders: const [ZipUrlLoader(base: url)]),
       ];
 
   List<Widget> subtitle(String text) => [
@@ -75,24 +83,64 @@ class _PageState extends State<Page> {
         subtitleDivider,
       ];
 
-  List<Widget> getting({String archive = ''}) => [
-        ...gettingString('string', 'assets/1/owl/owl.json', archive: archive),
-        ...gettingImageWidget('webp', 'assets/1/bird.webp', archive: archive),
-        ...gettingImageWidget('png', 'assets/1/fox.png', archive: archive),
-        ...gettingImageWidget('jpg', 'assets/1/whale.jpg', archive: archive),
-        ...gettingExists('exists', 'assets/1/non_exists.txt', archive: archive),
-        ...gettingExists('exists', 'assets/1/owl/owl.json', archive: archive),
+  List<Widget> gettingPlain() => [
+        ...gettingString('string', 'assets/1/owl/owl.json'),
+        ...gettingImageWidget('webp', 'assets/1/bird.webp'),
+        ...gettingImageWidget('png', 'assets/1/fox.png'),
+        ...gettingImageWidget('jpg', 'assets/1/whale.jpg'),
+        ...gettingExists('exists', 'assets/1/absent.txt'),
+        ...gettingExists('exists', 'assets/1/owl/owl.json'),
+      ];
+
+  List<Widget> gettingArchive(String name, {List<Loader>? loaders}) => [
+        ...gettingString(
+          'string',
+          'assets/$name/owl/owl.json',
+          archive: name,
+          loaders: loaders,
+        ),
+        ...gettingImageWidget(
+          'webp',
+          'assets/$name/bird.webp',
+          archive: name,
+          loaders: loaders,
+        ),
+        ...gettingImageWidget(
+          'png',
+          'assets/$name/fox.png',
+          archive: name,
+          loaders: loaders,
+        ),
+        ...gettingImageWidget(
+          'jpg',
+          'assets/$name/whale.jpg',
+          archive: name,
+          loaders: loaders,
+        ),
+        ...gettingExists(
+          'exists',
+          'assets/$name/absent.txt',
+          archive: name,
+          loaders: loaders,
+        ),
+        ...gettingExists(
+          'exists',
+          'assets/$name/owl/owl.json',
+          archive: name,
+          loaders: loaders,
+        ),
       ];
 
   List<Widget> gettingString(
     String title,
     String path, {
     String archive = '',
+    List<Loader>? loaders,
   }) =>
       view(
         title,
         path,
-        fm.loadString(path),
+        fm.loadString(path, loaders: loaders),
         archive: archive,
       );
 
@@ -100,11 +148,12 @@ class _PageState extends State<Page> {
     String title,
     String path, {
     String archive = '',
+    List<Loader>? loaders,
   }) =>
       view(
         title,
         path,
-        fm.loadImageWidget(path, width: appMagicSize),
+        fm.loadImageWidget(path, width: appMagicSize, loaders: loaders),
         archive: archive,
       );
 
@@ -112,11 +161,12 @@ class _PageState extends State<Page> {
     String title,
     String path, {
     String archive = '',
+    List<Loader>? loaders,
   }) =>
       view(
         title,
         path,
-        fm.exists(path),
+        fm.exists(path, loaders: loaders),
         archive: archive,
       );
 
@@ -188,10 +238,10 @@ class _PageState extends State<Page> {
       );
 }
 
-class AppCrossFileManager extends CrossFileManager {
-  static const url =
-      'https://raw.githubusercontent.com/signmotion/cross_file_manager/master/example/';
+const url =
+    'https://raw.githubusercontent.com/signmotion/cross_file_manager/master/example/';
 
+class AppCrossFileManager extends CrossFileManager {
   static final AppCrossFileManager _instance = AppCrossFileManager._();
 
   factory AppCrossFileManager() {
@@ -203,5 +253,6 @@ class AppCrossFileManager extends CrossFileManager {
           PlainAssetsLoader(),
           ZipAssetsLoader(),
           PlainUrlLoader(base: url),
+          ZipUrlLoader(base: url),
         ]);
 }

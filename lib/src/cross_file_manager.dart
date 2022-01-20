@@ -9,8 +9,8 @@ class CrossFileManager {
 
   const CrossFileManager({required this.loaders}) : assert(loaders.length > 0);
 
-  Future<bool> exists(String path) async {
-    for (final loader in loaders) {
+  Future<bool> exists(String path, {List<Loader>? loaders}) async {
+    for (final loader in loaders ?? this.loaders) {
       if (await loader.exists(path)) {
         return true;
       }
@@ -19,8 +19,8 @@ class CrossFileManager {
     return false;
   }
 
-  Future<File?> loadFile(String path) async {
-    for (final loader in loaders) {
+  Future<File?> loadFile(String path, {List<Loader>? loaders}) async {
+    for (final loader in loaders ?? this.loaders) {
       final r = await loader.loadFile(path);
       if (r != null) {
         return r;
@@ -32,11 +32,12 @@ class CrossFileManager {
 
   Future<widgets.Image?> loadImageWidget(
     String path, {
+    List<Loader>? loaders,
     double? width,
     double? height,
     widgets.BoxFit? fit,
   }) async {
-    for (final loader in loaders) {
+    for (final loader in loaders ?? this.loaders) {
       final r = await loader.loadImageWidget(
         path,
         width: width,
@@ -51,8 +52,8 @@ class CrossFileManager {
     return null;
   }
 
-  Future<String?> loadString(String path) async {
-    for (final loader in loaders) {
+  Future<String?> loadString(String path, {List<Loader>? loaders}) async {
+    for (final loader in loaders ?? this.loaders) {
       final r = await loader.loadString(path);
       if (r != null) {
         return r;
