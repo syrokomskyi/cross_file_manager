@@ -40,16 +40,18 @@ class _PageState extends State<Page> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //...plainPathDemo,
-              //...zipPathDemo,
-              ...urlPathDemo,
-            ],
+              ...plainAssetsDemo,
+              ...zipAssetsDemo,
+              ...urlDemo,
+            ]..removeAt(0),
           ),
         ),
       );
 
-  List<Widget> get plainPathDemo => [
-        ...subtitle('plain path'),
+  /// Get from local assets.
+  /// \see [AppCrossFileManager] with [PlainAssetsLoader]
+  List<Widget> get plainAssetsDemo => [
+        ...subtitle('plain assets path'),
         ...gettingString('string', 'assets/1/owl/owl.json'),
         ...gettingImageWidget('webp', 'assets/1/bird.webp'),
         ...gettingImageWidget('png', 'assets/1/fox.png'),
@@ -59,8 +61,9 @@ class _PageState extends State<Page> {
       ]..removeLast();
 
   /// Extract from zip-files.
-  List<Widget> get zipPathDemo => [
-        ...subtitle('zip path'),
+  /// \see [AppCrossFileManager] with [ZipAssetsLoader]
+  List<Widget> get zipAssetsDemo => [
+        ...subtitle('zip assets path'),
         ...gettingString('string', 'assets/2/owl/owl.json', archive: '2'),
         ...gettingImageWidget('webp', 'assets/2/bird.webp', archive: '2'),
         ...gettingImageWidget('png', 'assets/2/fox.png', archive: '2'),
@@ -69,9 +72,10 @@ class _PageState extends State<Page> {
         ...gettingExists('exists', 'assets/2/owl/owl.json', archive: '2'),
       ]..removeLast();
 
+  /// Download from Internet.
   /// \see [AppCrossFileManager] with [UrlLoader]
-  List<Widget> get urlPathDemo => [
-        ...subtitle('url path'),
+  List<Widget> get urlDemo => [
+        ...subtitle('url plain path'),
         ...gettingString('string', 'assets/1/owl/owl.json'),
         ...gettingImageWidget('webp', 'assets/1/bird.webp'),
         ...gettingImageWidget('png', 'assets/1/fox.png'),
@@ -81,7 +85,7 @@ class _PageState extends State<Page> {
       ]..removeLast();
 
   List<Widget> subtitle(String text) => [
-        subtitleDivider,
+        Padding(padding: EdgeInsets.all(appMagicSize / 2)),
         Text(text, textScaleFactor: 2),
         subtitleDivider,
       ];
@@ -106,7 +110,7 @@ class _PageState extends State<Page> {
       view(
         title,
         path,
-        fm.loadImageWidget(path, width: screenWidth / 3),
+        fm.loadImageWidget(path, width: appMagicSize),
         archive: archive,
       );
 
@@ -147,7 +151,14 @@ class _PageState extends State<Page> {
           );
         }
 
-        return snapshot.hasData ? _buildData(snapshot.data!) : Container();
+        if (snapshot.hasData) {
+          return Padding(
+            padding: EdgeInsets.all(appMagicSize / 10),
+            child: _buildData(snapshot.data!),
+          );
+        }
+
+        return Container();
       });
 
   Widget _buildData(dynamic data) {
@@ -172,10 +183,15 @@ class _PageState extends State<Page> {
 
   double get screenWidth => MediaQuery.of(context).size.width;
 
-  static const Widget subtitleDivider =
-      Divider(height: 30, color: Colors.black);
+  double get appMagicSize => screenWidth / 5;
 
-  static const Widget cellDivider = Divider();
+  Widget get subtitleDivider => cellDivider;
+
+  Widget get cellDivider => Divider(
+        height: appMagicSize / 2,
+        indent: appMagicSize,
+        endIndent: appMagicSize,
+      );
 }
 
 class AppCrossFileManager extends CrossFileManager {
