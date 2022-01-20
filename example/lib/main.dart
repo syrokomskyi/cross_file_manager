@@ -42,7 +42,7 @@ class _PageState extends State<Page> {
             children: [
               ...plainAssetsDemo,
               ...zipAssetsDemo,
-              ...urlDemo,
+              ...plainUrlDemo,
             ]..removeAt(0),
           ),
         ),
@@ -63,9 +63,9 @@ class _PageState extends State<Page> {
       ];
 
   /// Download from Internet.
-  /// \see [AppCrossFileManager] with [UrlLoader]
-  List<Widget> get urlDemo => [
-        ...subtitle('url plain path'),
+  /// \see [AppCrossFileManager] with [PlainUrlLoader]
+  List<Widget> get plainUrlDemo => [
+        ...subtitle('plain url path'),
         ...getting(),
       ];
 
@@ -202,6 +202,6 @@ class AppCrossFileManager extends CrossFileManager {
       : super(loaders: const [
           PlainAssetsLoader(),
           ZipAssetsLoader(),
-          UrlLoader(base: url),
+          PlainUrlLoader(base: url),
         ]);
 }

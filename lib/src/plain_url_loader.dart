@@ -6,12 +6,12 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import 'loader.dart';
 
-class UrlLoader extends Loader {
+class PlainUrlLoader extends Loader {
   final String base;
 
   String url(String path) => '$base/$path';
 
-  const UrlLoader({required this.base}) : assert(base.length > 0);
+  const PlainUrlLoader({required this.base}) : assert(base.length > 0);
 
   @override
   Future<bool> exists(String path) async {
