@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:path/path.dart' as p;
 
+import 'cross_file_manager.dart';
 import 'loader.dart';
 
 class PlainUrlLoader extends Loader {
@@ -33,7 +33,7 @@ class PlainUrlLoader extends Loader {
   Future<File?> loadFile(String path) async {
     assert(path.isNotEmpty);
 
-    CacheManager.logLevel = kDebugMode
+    CacheManager.logLevel = CrossFileManager.log
         ? CacheManagerLogLevel.verbose
         : CacheManagerLogLevel.warning;
 

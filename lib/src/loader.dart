@@ -55,7 +55,7 @@ abstract class Loader {
       await dir.delete(recursive: true);
     }
 
-    cacheManager.emptyCache();
+    await cacheManager.emptyCache();
   }
 
   @protected

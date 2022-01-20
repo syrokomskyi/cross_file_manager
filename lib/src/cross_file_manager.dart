@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
 
 import '../cross_file_manager.dart';
 
 class CrossFileManager {
+  static bool log = kDebugMode;
+
   final List<Loader> loaders;
 
   const CrossFileManager({required this.loaders}) : assert(loaders.length > 0);
@@ -63,6 +66,9 @@ class CrossFileManager {
     return null;
   }
 
-  Future<void> clearCache() async =>
-      loaders.forEach((loader) => loader.clearCache());
+  Future<void> clearCache() async {
+    for (final loader in loaders) {
+      await loader.clearCache();
+    }
+  }
 }

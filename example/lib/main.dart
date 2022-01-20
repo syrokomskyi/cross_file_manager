@@ -29,6 +29,7 @@ class _PageState extends State<Page> {
   void initState() {
     super.initState();
 
+    CrossFileManager.log = false;
     fm.clearCache();
   }
 
@@ -40,9 +41,9 @@ class _PageState extends State<Page> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //...plainAssetsDemo,
-              //...zipAssetsDemo,
-              //...plainUrlDemo,
+              ...plainAssetsDemo,
+              ...zipAssetsDemo,
+              ...plainUrlDemo,
               ...zipUrlDemo,
             ]..removeAt(0),
           ),
@@ -253,6 +254,8 @@ class AppCrossFileManager extends CrossFileManager {
           PlainAssetsLoader(),
           ZipAssetsLoader(),
           PlainUrlLoader(base: url),
-          ZipUrlLoader(base: url),
+
+          /// \see [zipUrlDemo]
+          // ZipUrlLoader(base: url),
         ]);
 }

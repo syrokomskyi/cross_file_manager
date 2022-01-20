@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart' as widgets;
 import 'package:path/path.dart' as p;
 
 import 'loader.dart';
+import 'log.dart';
 
 abstract class ZipLoader extends Loader {
   @override
@@ -44,7 +45,7 @@ abstract class ZipLoader extends Loader {
     );
     */
 
-    print('loadFile path `$path`');
+    log('loadFile path `$path`');
 
     // direct verify into the url path (was copied below)
     final localPathToFile = p.join(await localPath, path);
@@ -61,10 +62,10 @@ abstract class ZipLoader extends Loader {
     for (var i = splits.length - 1; i >= 0; --i) {
       final subSplits = splits.sublist(0, i);
       subPath = '${p.joinAll(subSplits)}.zip';
-      print('subPath `$subPath`, look into the url');
+      log('subPath `$subPath`, look into the url');
       if (await sourceLoader.exists(subPath)) {
         final subFile = await sourceLoader.loadFile(subPath);
-        print('subFile from assets `$subFile`');
+        log('subFile from assets `$subFile`');
         if (subFile?.existsSync() ?? false) {
           foundFile = subFile;
           break;
@@ -72,33 +73,33 @@ abstract class ZipLoader extends Loader {
       }
     }
 
-    print('foundFile `$foundFile`');
+    log('foundFile `$foundFile`');
     if (foundFile == null) {
       return null;
     }
 
     // extract all files from archive
     final bytes = foundFile.readAsBytesSync();
-    print('file size `${bytes.length}` bytes');
+    log('file size `${bytes.length}` bytes');
     final archive = ZipDecoder().decodeBytes(bytes);
     final baseOutPath = p.dirname(p.join(await localPath, subPath));
-    print('baseOutPath $baseOutPath');
+    log('baseOutPath $baseOutPath');
     for (final file in archive) {
-      print('file `$file`');
+      log('file `$file`');
       final out = p.join(baseOutPath, file.name);
       if (file.isFile) {
-        print('getting content from `${file.name}` to `$out`');
+        log('getting content from `${file.name}` to `$out`');
         final data = file.content as List<int>;
         File(out)
           ..createSync(recursive: true)
           ..writeAsBytesSync(data);
       } else {
-        print('create directory `$out`');
+        log('create directory `$out`');
         Directory(out).createSync(recursive: true);
       }
     }
 
-    print('localPathToFile `$localPathToFile`');
+    log('localPathToFile `$localPathToFile`');
     file = File(localPathToFile);
 
     return file.existsSync() ? file : null;
