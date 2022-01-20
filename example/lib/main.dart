@@ -23,7 +23,7 @@ class Page extends StatefulWidget {
 }
 
 class _PageState extends State<Page> {
-  AssetCrossFileManager get fm => AssetCrossFileManager();
+  AppCrossFileManager get fm => AppCrossFileManager();
 
   @override
   void initState() {
@@ -40,8 +40,9 @@ class _PageState extends State<Page> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ...plainPathDemo,
-              ...zipPathDemo,
+              //...plainPathDemo,
+              //...zipPathDemo,
+              ...urlPathDemo,
             ],
           ),
         ),
@@ -66,6 +67,17 @@ class _PageState extends State<Page> {
         ...gettingImageWidget('jpg', 'assets/2/whale.jpg', archive: '2'),
         ...gettingExists('exists', 'assets/2/non_exists.file', archive: '2'),
         ...gettingExists('exists', 'assets/2/owl/owl.json', archive: '2'),
+      ]..removeLast();
+
+  /// \see [AppCrossFileManager] with [UrlLoader]
+  List<Widget> get urlPathDemo => [
+        ...subtitle('url path'),
+        ...gettingString('string', 'assets/1/owl/owl.json'),
+        ...gettingImageWidget('webp', 'assets/1/bird.webp'),
+        ...gettingImageWidget('png', 'assets/1/fox.png'),
+        ...gettingImageWidget('jpg', 'assets/1/whale.jpg'),
+        ...gettingExists('exists', 'assets/1/non_exists.file'),
+        ...gettingExists('exists', 'assets/1/owl/owl.json'),
       ]..removeLast();
 
   List<Widget> subtitle(String text) => [
@@ -164,4 +176,22 @@ class _PageState extends State<Page> {
       Divider(height: 30, color: Colors.black);
 
   static const Widget cellDivider = Divider();
+}
+
+class AppCrossFileManager extends CrossFileManager {
+  static const url =
+      'https://raw.githubusercontent.com/signmotion/cross_file_manager/master/example/';
+
+  static final AppCrossFileManager _instance = AppCrossFileManager._();
+
+  factory AppCrossFileManager() {
+    return _instance;
+  }
+
+  AppCrossFileManager._()
+      : super(loaders: const [
+          PlainAssetsLoader(),
+          ZipAssetsLoader(),
+          UrlLoader(base: url),
+        ]);
 }

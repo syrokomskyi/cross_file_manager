@@ -6,6 +6,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -24,6 +25,8 @@ abstract class Loader {
 
     return path;
   }
+
+  DefaultCacheManager get cacheManager => DefaultCacheManager();
 
   Future<bool> exists(String path);
 
@@ -46,6 +49,8 @@ abstract class Loader {
     if (dir.existsSync()) {
       await dir.delete(recursive: true);
     }
+
+    cacheManager.emptyCache();
   }
 
   @protected
