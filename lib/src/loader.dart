@@ -15,6 +15,7 @@ abstract class Loader {
 
   /// Overwrite this when a custom loader using a cache.
   /// \see [clearCache]
+  @mustCallSuper
   String get temporaryFolder => 'cfm';
 
   /// \see [clearCache]

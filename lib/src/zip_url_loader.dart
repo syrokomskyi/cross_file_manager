@@ -1,36 +1,26 @@
 import 'dart:io';
 
 import 'package:archive/archive.dart';
-import 'package:flutter/widgets.dart' as widgets;
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 
 import 'loader.dart';
 import 'plain_url_loader.dart';
+import 'zip_loader.dart';
 
-class ZipUrlLoader extends Loader {
+class ZipUrlLoader extends ZipLoader {
   final String base;
 
   @override
-  String get temporaryFolder => '${super.temporaryFolder}/zipurl';
+  @mustCallSuper
+  String get temporaryFolder => '${super.temporaryFolder}/url';
+
+  @override
+  Loader get sourceLoader => PlainUrlLoader(base: base);
 
   String url(String path) => p.join(base, path);
 
   const ZipUrlLoader({required this.base}) : assert(base.length > 0);
-
-  @override
-  Future<bool> exists(String path) async {
-    assert(path.isNotEmpty);
-
-    late final File? file;
-    try {
-      file = await loadFile(path);
-    } on HttpException {
-      // it's OK: a state can be 404 or any
-      file = null;
-    }
-
-    return file?.existsSync() ?? false;
-  }
 
   @override
   Future<File?> loadFile(String path) async {
@@ -61,8 +51,8 @@ class ZipUrlLoader extends Loader {
       final subSplits = splits.sublist(0, i);
       subPath = '${p.joinAll(subSplits)}.zip';
       print('subPath `$subPath`, look into the url');
-      if (await _plainUrlLoader.exists(subPath)) {
-        final subFile = await _plainUrlLoader.loadFile(subPath);
+      if (await sourceLoader.exists(subPath)) {
+        final subFile = await sourceLoader.loadFile(subPath);
         print('subFile from assets `$subFile`');
         if (subFile?.existsSync() ?? false) {
           foundFile = subFile;
@@ -102,37 +92,4 @@ class ZipUrlLoader extends Loader {
 
     return file.existsSync() ? file : null;
   }
-
-  @override
-  Future<widgets.Image?> loadImageWidget(
-    String path, {
-    double? width,
-    double? height,
-    widgets.BoxFit? fit,
-  }) async {
-    assert(path.isNotEmpty);
-
-    final file = await loadFile(path);
-    if (file == null) {
-      return null;
-    }
-
-    return widgets.Image.file(
-      file,
-      width: width,
-      height: height,
-      fit: fit,
-    );
-  }
-
-  @override
-  Future<String?> loadString(String path) async {
-    assert(path.isNotEmpty);
-
-    final file = await loadFile(path);
-
-    return file?.readAsStringSync();
-  }
-
-  PlainUrlLoader get _plainUrlLoader => PlainUrlLoader(base: base);
 }

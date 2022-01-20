@@ -1,25 +1,24 @@
 import 'dart:io';
 
 import 'package:archive/archive.dart';
-import 'package:flutter/widgets.dart' as widgets;
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 
 import 'loader.dart';
 import 'plain_assets_loader.dart';
+import 'zip_loader.dart';
 
 /// \warning Some files from ultra compression tools (for ex., 7Zip)
 /// doesn't extract correctly.
-class ZipAssetsLoader extends Loader {
-  const ZipAssetsLoader();
+class ZipAssetsLoader extends ZipLoader {
+  @override
+  @mustCallSuper
+  String get temporaryFolder => '${super.temporaryFolder}/ast';
 
   @override
-  Future<bool> exists(String path) async {
-    assert(path.isNotEmpty);
+  Loader get sourceLoader => const PlainAssetsLoader();
 
-    final file = await loadFile(path);
-
-    return file?.existsSync() ?? false;
-  }
+  const ZipAssetsLoader();
 
   @override
   Future<File?> loadFile(String path) async {
@@ -43,8 +42,8 @@ class ZipAssetsLoader extends Loader {
       final subSplits = splits.sublist(0, i);
       subPath = '${p.joinAll(subSplits)}.zip';
       print('subPath `$subPath`, look into the assets');
-      if (await _plainAssetsLoader.exists(subPath)) {
-        final subFile = await _plainAssetsLoader.loadFile(subPath);
+      if (await sourceLoader.exists(subPath)) {
+        final subFile = await sourceLoader.loadFile(subPath);
         print('subFile from assets `$subFile`');
         if (subFile?.existsSync() ?? false) {
           foundFile = subFile;
@@ -84,37 +83,4 @@ class ZipAssetsLoader extends Loader {
 
     return file.existsSync() ? file : null;
   }
-
-  @override
-  Future<widgets.Image?> loadImageWidget(
-    String path, {
-    double? width,
-    double? height,
-    widgets.BoxFit? fit,
-  }) async {
-    assert(path.isNotEmpty);
-
-    final file = await loadFile(path);
-    if (file == null) {
-      return null;
-    }
-
-    return widgets.Image.file(
-      file,
-      width: width,
-      height: height,
-      fit: fit,
-    );
-  }
-
-  @override
-  Future<String?> loadString(String path) async {
-    assert(path.isNotEmpty);
-
-    final file = await loadFile(path);
-
-    return file?.readAsStringSync();
-  }
-
-  static const _plainAssetsLoader = PlainAssetsLoader();
 }
