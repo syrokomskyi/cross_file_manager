@@ -2,14 +2,15 @@ import 'cross_file_manager.dart';
 import 'plain_assets_loader.dart';
 import 'zip_assets_loader.dart';
 
-class AssetCrossFileManager extends CrossFileManager {
-  static final _instance = AssetCrossFileManager._();
+/// \see /example/lib/main.dart
+class AssetsCrossFileManager extends CrossFileManager {
+  static final _instance = AssetsCrossFileManager._();
 
-  factory AssetCrossFileManager() {
+  factory AssetsCrossFileManager() {
     return _instance;
   }
 
-  AssetCrossFileManager._()
+  AssetsCrossFileManager._()
       : super(loaders: const [
           PlainAssetsLoader(),
           ZipAssetsLoader(),
