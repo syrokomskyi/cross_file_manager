@@ -1,6 +1,6 @@
 import 'package:cross_file_manager/cross_file_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart' as widgets show Image;
+import 'package:flutter/widgets.dart' as widgets;
 
 void main() => runApp(const App());
 
@@ -141,7 +141,7 @@ class _PageState extends State<Page> {
       view(
         title,
         path,
-        fm.loadString(path, loaders: loaders),
+        fm.loadStringOrDefault(path, loaders: loaders, def: 'NOT FOUND'),
         archive: archive,
       );
 
@@ -154,7 +154,11 @@ class _PageState extends State<Page> {
       view(
         title,
         path,
-        fm.loadImageWidget(path, width: appMagicSize, loaders: loaders),
+        fm.loadImageWidgetOrDefault(
+          path,
+          width: appMagicSize,
+          loaders: loaders,
+        ),
         archive: archive,
       );
 
@@ -215,12 +219,12 @@ class _PageState extends State<Page> {
       return Text(data ? 'YES' : 'NO');
     }
 
-    if (data is widgets.Image) {
-      return data;
-    }
-
     if (data is String) {
       return Text(data);
+    }
+
+    if (data is widgets.Widget) {
+      return data;
     }
 
     return Text('Unrecognized `$data`');
@@ -242,7 +246,7 @@ class _PageState extends State<Page> {
 const url =
     'https://raw.githubusercontent.com/signmotion/cross_file_manager/master/example/';
 
-class AppCrossFileManager extends CrossFileManager {
+class AppCrossFileManager extends CrossFileManager with DefaultValueMix {
   static final _instance = AppCrossFileManager._();
 
   factory AppCrossFileManager() {

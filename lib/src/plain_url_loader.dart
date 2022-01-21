@@ -44,17 +44,23 @@ class PlainUrlLoader extends Loader {
     );
     */
 
-    final fileInfo = await cacheManager.downloadFile(url(path));
+    try {
+      final fileInfo = await cacheManager.downloadFile(url(path));
+      return fileInfo.file;
+    } on HttpException {
+      // it's OK: a state can be 404 or any
+    }
 
-    return fileInfo.file;
+    return null;
   }
 
   @override
-  Future<widgets.Image?> loadImageWidget(
+  Future<widgets.Widget?> loadImageWidget(
     String path, {
     double? width,
     double? height,
     widgets.BoxFit? fit,
+    widgets.ImageErrorWidgetBuilder? errorBuilder,
   }) async {
     assert(path.isNotEmpty);
 
@@ -67,6 +73,7 @@ class PlainUrlLoader extends Loader {
             width: width,
             height: height,
             fit: fit,
+            errorBuilder: errorBuilder,
           );
   }
 

@@ -30,7 +30,7 @@ abstract class Loader {
     return path;
   }
 
-  DefaultCacheManager get cacheManager => DefaultCacheManager();
+  CacheManager get cacheManager => DefaultCacheManager();
 
   Future<bool> exists(String path);
 
@@ -40,11 +40,12 @@ abstract class Loader {
 
   Future<String?> loadString(String path);
 
-  Future<widgets.Image?> loadImageWidget(
+  Future<widgets.Widget?> loadImageWidget(
     String path, {
     double? width,
     double? height,
     widgets.BoxFit? fit,
+    widgets.ImageErrorWidgetBuilder? errorBuilder,
   });
 
   /// \see [localPath]

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
 
-import '../cross_file_manager.dart';
+import 'loader.dart';
 
 class CrossFileManager {
   static bool log = kDebugMode;
@@ -33,12 +33,13 @@ class CrossFileManager {
     return null;
   }
 
-  Future<widgets.Image?> loadImageWidget(
+  Future<widgets.Widget?> loadImageWidget(
     String path, {
     List<Loader>? loaders,
     double? width,
     double? height,
     widgets.BoxFit? fit,
+    widgets.ImageErrorWidgetBuilder? errorBuilder,
   }) async {
     for (final loader in loaders ?? this.loaders) {
       final r = await loader.loadImageWidget(
@@ -46,6 +47,7 @@ class CrossFileManager {
         width: width,
         height: height,
         fit: fit,
+        errorBuilder: errorBuilder,
       );
       if (r != null) {
         return r;

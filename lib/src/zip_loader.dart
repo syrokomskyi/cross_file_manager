@@ -33,7 +33,6 @@ abstract class ZipLoader extends Loader {
     return file?.existsSync() ?? false;
   }
 
-
   @override
   Future<File?> loadFile(String path) async {
     assert(path.isNotEmpty);
@@ -106,11 +105,12 @@ abstract class ZipLoader extends Loader {
   }
 
   @override
-  Future<widgets.Image?> loadImageWidget(
+  Future<widgets.Widget?> loadImageWidget(
     String path, {
     double? width,
     double? height,
     widgets.BoxFit? fit,
+    widgets.ImageErrorWidgetBuilder? errorBuilder,
   }) async {
     assert(path.isNotEmpty);
 
@@ -124,6 +124,7 @@ abstract class ZipLoader extends Loader {
       width: width,
       height: height,
       fit: fit,
+      errorBuilder: errorBuilder,
     );
   }
 

@@ -43,11 +43,12 @@ class PlainAssetsLoader extends Loader {
   }
 
   @override
-  Future<widgets.Image?> loadImageWidget(
+  Future<widgets.Widget?> loadImageWidget(
     String path, {
     double? width,
     double? height,
     widgets.BoxFit? fit,
+    widgets.ImageErrorWidgetBuilder? errorBuilder,
   }) async {
     assert(path.isNotEmpty);
 
@@ -57,6 +58,7 @@ class PlainAssetsLoader extends Loader {
             width: width,
             height: height,
             fit: fit,
+            errorBuilder: errorBuilder,
           )
         : null;
   }
