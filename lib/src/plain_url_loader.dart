@@ -59,16 +59,15 @@ class PlainUrlLoader extends Loader {
     assert(path.isNotEmpty);
 
     final file = await loadFile(path);
-    if (file == null) {
-      return null;
-    }
 
-    return widgets.Image.file(
-      file,
-      width: width,
-      height: height,
-      fit: fit,
-    );
+    return file == null
+        ? null
+        : widgets.Image.file(
+            file,
+            width: width,
+            height: height,
+            fit: fit,
+          );
   }
 
   @override
