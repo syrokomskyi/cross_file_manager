@@ -11,7 +11,7 @@ class AssetsCrossFileManager extends CrossFileManager with DefaultValueMix {
     return _instance;
   }
 
-  AssetsCrossFileManager._()
+  const AssetsCrossFileManager._()
       : super(loaders: const [
           PlainAssetsLoader(),
           ZipAssetsLoader(),

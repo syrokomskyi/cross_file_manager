@@ -45,8 +45,7 @@ class PlainUrlLoader extends Loader {
     */
 
     try {
-      final fileInfo = await cacheManager.downloadFile(url(path));
-      return fileInfo.file;
+      return (await cacheManager.downloadFile(url(path))).file;
     } on HttpException {
       // it's OK: a state can be 404 or any
     }
