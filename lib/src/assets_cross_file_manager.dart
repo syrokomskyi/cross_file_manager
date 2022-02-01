@@ -7,13 +7,14 @@ import 'zip_assets_loader.dart';
 class AssetsCrossFileManager extends CrossFileManager with DefaultValueMix {
   static final _instance = AssetsCrossFileManager._();
 
-  factory AssetsCrossFileManager() {
-    return _instance;
-  }
+  factory AssetsCrossFileManager() => _instance;
 
-  const AssetsCrossFileManager._()
-      : super(loaders: const [
-          PlainAssetsLoader(),
-          ZipAssetsLoader(),
-        ]);
+  AssetsCrossFileManager._()
+      : super(
+          loaders: const [
+            PlainAssetsLoader(),
+            ZipAssetsLoader(),
+          ],
+          needClearCache: false,
+        );
 }

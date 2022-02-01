@@ -10,11 +10,28 @@ class CrossFileManager {
 
   final List<Loader> loaders;
 
-  const CrossFileManager({required this.loaders}) : assert(loaders.length > 0);
+  CrossFileManager({required this.loaders, bool needClearCache = false})
+      : assert(loaders.isNotEmpty) {
+    if (needClearCache) {
+      clearCache();
+    }
+  }
 
   Future<bool> exists(String path, {List<Loader>? loaders}) async {
     for (final loader in loaders ?? this.loaders) {
       if (await loader.exists(path)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /// Just add [path] to cache for fast access in the future.
+  Future<bool> warmUp(String path, {List<Loader>? loaders}) async {
+    for (final loader in loaders ?? this.loaders) {
+      final success = await loader.warmUp(path);
+      if (success) {
         return true;
       }
     }
