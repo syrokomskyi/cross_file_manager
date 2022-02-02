@@ -44,7 +44,7 @@ abstract class ZipLoader extends Loader {
     );
     */
 
-    li('loadFile path `$path`');
+    li('$runtimeType loadFile path `$path`');
 
     // direct verify into the url path (was copied below)
     final localPathToFile = p.join(await localPath, path);
@@ -58,13 +58,13 @@ abstract class ZipLoader extends Loader {
     final splits = p.split(p.withoutExtension(path));
     File? foundFile;
     late String subPath;
-    for (var i = splits.length - 1; i >= 0; --i) {
+    for (var i = splits.length - 1; i > 0; --i) {
       final subSplits = splits.sublist(0, i);
       subPath = '${p.joinAll(subSplits)}.zip';
-      li('subPath `$subPath`, look into the url');
+      li('$runtimeType subPath `$subPath`, look into the url');
       if (await sourceLoader.exists(subPath)) {
         final subFile = await sourceLoader.loadFile(subPath);
-        li('subFile from assets `$subFile`');
+        li('$runtimeType subFile from assets `$subFile`');
         if (subFile?.existsSync() ?? false) {
           foundFile = subFile;
           break;
@@ -72,33 +72,33 @@ abstract class ZipLoader extends Loader {
       }
     }
 
-    li('foundFile `$foundFile`');
+    li('$runtimeType foundFile `$foundFile` by path segments $splits');
     if (foundFile == null) {
       return null;
     }
 
     // extract all files from archive
     final bytes = foundFile.readAsBytesSync();
-    li('file size `${bytes.length}` bytes');
+    li('$runtimeType file size `${bytes.length}` bytes');
     final archive = ZipDecoder().decodeBytes(bytes);
     final baseOutPath = p.dirname(p.join(await localPath, subPath));
-    li('baseOutPath $baseOutPath');
+    li('$runtimeType baseOutPath $baseOutPath');
     for (final file in archive) {
-      li('file `$file`');
+      li('$runtimeType file `$file`');
       final out = p.join(baseOutPath, file.name);
       if (file.isFile) {
-        li('getting content from `${file.name}` to `$out`');
+        li('$runtimeType getting content from `${file.name}` to `$out`');
         final data = file.content as List<int>;
         File(out)
           ..createSync(recursive: true)
           ..writeAsBytesSync(data);
       } else {
-        li('create directory `$out`');
+        li('$runtimeType create directory `$out`');
         Directory(out).createSync(recursive: true);
       }
     }
 
-    li('localPathToFile `$localPathToFile`');
+    li('$runtimeType localPathToFile `$localPathToFile`');
     file = File(localPathToFile);
 
     return file.existsSync() ? file : null;
