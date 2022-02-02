@@ -8,4 +8,5 @@ export 'src/plain_assets_loader.dart';
 export 'src/plain_firebase_loader.dart';
 export 'src/plain_url_loader.dart';
 export 'src/zip_assets_loader.dart';
+export 'src/zip_firebase_loader.dart';
 export 'src/zip_url_loader.dart';
