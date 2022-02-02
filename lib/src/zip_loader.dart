@@ -44,7 +44,7 @@ abstract class ZipLoader extends Loader {
     );
     */
 
-    log('loadFile path `$path`');
+    li('loadFile path `$path`');
 
     // direct verify into the url path (was copied below)
     final localPathToFile = p.join(await localPath, path);
@@ -61,10 +61,10 @@ abstract class ZipLoader extends Loader {
     for (var i = splits.length - 1; i >= 0; --i) {
       final subSplits = splits.sublist(0, i);
       subPath = '${p.joinAll(subSplits)}.zip';
-      log('subPath `$subPath`, look into the url');
+      li('subPath `$subPath`, look into the url');
       if (await sourceLoader.exists(subPath)) {
         final subFile = await sourceLoader.loadFile(subPath);
-        log('subFile from assets `$subFile`');
+        li('subFile from assets `$subFile`');
         if (subFile?.existsSync() ?? false) {
           foundFile = subFile;
           break;
@@ -72,33 +72,33 @@ abstract class ZipLoader extends Loader {
       }
     }
 
-    log('foundFile `$foundFile`');
+    li('foundFile `$foundFile`');
     if (foundFile == null) {
       return null;
     }
 
     // extract all files from archive
     final bytes = foundFile.readAsBytesSync();
-    log('file size `${bytes.length}` bytes');
+    li('file size `${bytes.length}` bytes');
     final archive = ZipDecoder().decodeBytes(bytes);
     final baseOutPath = p.dirname(p.join(await localPath, subPath));
-    log('baseOutPath $baseOutPath');
+    li('baseOutPath $baseOutPath');
     for (final file in archive) {
-      log('file `$file`');
+      li('file `$file`');
       final out = p.join(baseOutPath, file.name);
       if (file.isFile) {
-        log('getting content from `${file.name}` to `$out`');
+        li('getting content from `${file.name}` to `$out`');
         final data = file.content as List<int>;
         File(out)
           ..createSync(recursive: true)
           ..writeAsBytesSync(data);
       } else {
-        log('create directory `$out`');
+        li('create directory `$out`');
         Directory(out).createSync(recursive: true);
       }
     }
 
-    log('localPathToFile `$localPathToFile`');
+    li('localPathToFile `$localPathToFile`');
     file = File(localPathToFile);
 
     return file.existsSync() ? file : null;

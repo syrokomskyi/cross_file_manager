@@ -4,9 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
 
 import 'loader.dart';
+import 'log.dart';
 
 class CrossFileManager {
-  static bool log = kDebugMode;
+  static Log log = kDebugMode ? li : liSilent;
 
   final List<Loader> loaders;
 
@@ -86,6 +87,7 @@ class CrossFileManager {
   }
 
   Future<void> clearCache() async {
+    log('Purging cache...');
     for (final loader in loaders) {
       await loader.clearCache();
     }

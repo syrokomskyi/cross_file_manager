@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 
 import 'cross_file_manager.dart';
 import 'loader.dart';
+import 'log.dart';
 
 class PlainUrlLoader extends Loader {
   final String base;
@@ -33,7 +34,7 @@ class PlainUrlLoader extends Loader {
   Future<File?> loadFile(String path) async {
     assert(path.isNotEmpty);
 
-    CacheManager.logLevel = CrossFileManager.log
+    CacheManager.logLevel = CrossFileManager.log == li
         ? CacheManagerLogLevel.verbose
         : CacheManagerLogLevel.warning;
 

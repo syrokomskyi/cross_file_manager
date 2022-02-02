@@ -29,7 +29,6 @@ class _PageState extends State<Page> {
   void initState() {
     super.initState();
 
-    CrossFileManager.log = false;
     fm.clearCache();
   }
 
@@ -253,7 +252,7 @@ class AppCrossFileManager extends CrossFileManager with DefaultValueMix {
     return _instance;
   }
 
-  const AppCrossFileManager._()
+  AppCrossFileManager._()
       : super(loaders: const [
           PlainAssetsLoader(),
           ZipAssetsLoader(),

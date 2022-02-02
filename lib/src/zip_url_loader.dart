@@ -10,7 +10,7 @@ class ZipUrlLoader extends ZipLoader {
 
   @override
   @mustCallSuper
-  String get temporaryFolder => '${super.temporaryFolder}/url';
+  String get temporaryFolder => '${super.temporaryFolder}/zu';
 
   @override
   Loader get sourceLoader => PlainUrlLoader(base: base);

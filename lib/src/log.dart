@@ -1,7 +1,7 @@
-import 'cross_file_manager.dart';
+typedef Log = void Function(String);
 
-void log(String s) {
-  if (CrossFileManager.log) {
-    print(s);
-  }
+void li(String s) {
+  print(s);
 }
+
+void liSilent(String s) {}

@@ -6,6 +6,7 @@ import 'package:flutter_cache_manager_firebase/flutter_cache_manager_firebase.da
 
 import 'cross_file_manager.dart';
 import 'loader.dart';
+import 'log.dart';
 
 class PlainFirebaseLoader extends Loader {
   const PlainFirebaseLoader();
@@ -32,7 +33,7 @@ class PlainFirebaseLoader extends Loader {
   Future<File?> loadFile(String path) async {
     assert(path.isNotEmpty);
 
-    CacheManager.logLevel = CrossFileManager.log
+    CacheManager.logLevel = CrossFileManager.log == li
         ? CacheManagerLogLevel.verbose
         : CacheManagerLogLevel.warning;
 

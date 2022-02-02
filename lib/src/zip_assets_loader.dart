@@ -9,7 +9,7 @@ import 'zip_loader.dart';
 class ZipAssetsLoader extends ZipLoader {
   @override
   @mustCallSuper
-  String get temporaryFolder => '${super.temporaryFolder}/ast';
+  String get temporaryFolder => '${super.temporaryFolder}/za';
 
   @override
   Loader get sourceLoader => const PlainAssetsLoader();
