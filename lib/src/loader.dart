@@ -34,6 +34,12 @@ abstract class Loader {
 
   Future<bool> exists(String path);
 
+  Future<bool> existsInCache(String path) async {
+    assert(path.isNotEmpty);
+
+    return (await cacheManager.getFileFromCache(path)) != null;
+  }
+
   Future<bool> notExists(String path) async => !(await exists(path));
 
   // just touch a file by [path] for store it to cache

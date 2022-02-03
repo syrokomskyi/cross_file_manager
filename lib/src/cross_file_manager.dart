@@ -28,7 +28,19 @@ class CrossFileManager {
     return false;
   }
 
+  /// \see [warmUp]
+  Future<bool> existsInCache(String path, {List<Loader>? loaders}) async {
+    for (final loader in loaders ?? this.loaders) {
+      if (await loader.existsInCache(path)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   /// Just add [path] to cache for fast access in the future.
+  /// \see [existsInCache]
   Future<bool> warmUp(String path, {List<Loader>? loaders}) async {
     for (final loader in loaders ?? this.loaders) {
       final success = await loader.warmUp(path);
