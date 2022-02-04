@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:path/path.dart' as p;
 
+import '../log.dart';
 import 'loader.dart';
-import 'log.dart';
 
 abstract class ZipLoader extends Loader {
   @override
@@ -61,7 +61,7 @@ abstract class ZipLoader extends Loader {
     for (var i = splits.length - 1; i > 0; --i) {
       final subSplits = splits.sublist(0, i);
       subPath = '${p.joinAll(subSplits)}.zip';
-      li('$runtimeType subPath `$subPath`, look into the url');
+      li('$runtimeType subPath `$subPath` for search `$path`');
       if (await sourceLoader.exists(subPath)) {
         final subFile = await sourceLoader.loadFile(subPath);
         li('$runtimeType subFile from assets `$subFile`');
@@ -72,9 +72,11 @@ abstract class ZipLoader extends Loader {
       }
     }
 
-    li('$runtimeType foundFile `$foundFile` by path segments $splits');
     if (foundFile == null) {
+      li('$runtimeType not found file by path segments $splits');
       return null;
+    } else {
+      li('$runtimeType found file `$foundFile` by path segments $splits');
     }
 
     // extract all files from archive

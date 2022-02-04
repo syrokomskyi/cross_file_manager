@@ -80,4 +80,7 @@ abstract class Loader {
     ui.decodeImageFromList(bytes, completer.complete);
     return completer.future;
   }
+
+  @override
+  String toString() => '$runtimeType';
 }

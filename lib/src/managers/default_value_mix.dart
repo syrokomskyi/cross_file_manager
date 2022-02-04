@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart' as widgets;
 
+import '../loaders/loader.dart';
 import 'cross_file_manager.dart';
-import 'loader.dart';
 
 mixin DefaultValueMix on CrossFileManager {
   static const defImageWidget = Icon(Icons.image, color: Colors.indigoAccent);

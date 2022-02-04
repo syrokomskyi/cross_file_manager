@@ -1,7 +1,7 @@
+import '../loaders/plain_assets_loader.dart';
+import '../loaders/zip_assets_loader.dart';
 import 'cross_file_manager.dart';
 import 'default_value_mix.dart';
-import 'plain_assets_loader.dart';
-import 'zip_assets_loader.dart';
 
 /// \see /example/lib/main.dart
 class AssetsCrossFileManager extends CrossFileManager with DefaultValueMix {

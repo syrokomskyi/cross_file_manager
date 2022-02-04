@@ -2,17 +2,18 @@ import 'dart:io';
 
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_cache_manager_firebase/flutter_cache_manager_firebase.dart';
+import 'package:path/path.dart' as p;
 
-import 'cross_file_manager.dart';
+import '../log.dart';
+import '../managers/cross_file_manager.dart';
 import 'loader.dart';
-import 'log.dart';
 
-class PlainFirebaseLoader extends Loader {
-  const PlainFirebaseLoader();
+class PlainUrlLoader extends Loader {
+  final String base;
 
-  @override
-  CacheManager get cacheManager => FirebaseCacheManager();
+  String url(String path) => p.join(base, path);
+
+  const PlainUrlLoader({required this.base}) : assert(base.length > 0);
 
   @override
   Future<bool> exists(String path) async {
@@ -45,8 +46,8 @@ class PlainFirebaseLoader extends Loader {
     */
 
     try {
-      return (await cacheManager.downloadFile(path)).file;
-    } on Exception {
+      return (await cacheManager.downloadFile(url(path))).file;
+    } on HttpException {
       // it's OK: a state can be 404 or any
     }
 

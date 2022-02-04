@@ -1,12 +1,12 @@
 library cross_file_manager;
 
-export 'src/assets_cross_file_manager.dart';
-export 'src/cross_file_manager.dart';
-export 'src/default_value_mix.dart';
-export 'src/loader.dart';
-export 'src/plain_assets_loader.dart';
-export 'src/plain_firebase_loader.dart';
-export 'src/plain_url_loader.dart';
-export 'src/zip_assets_loader.dart';
-export 'src/zip_firebase_loader.dart';
-export 'src/zip_url_loader.dart';
+export 'src/loaders/loader.dart';
+export 'src/loaders/plain_assets_loader.dart';
+export 'src/loaders/plain_firebase_loader.dart';
+export 'src/loaders/plain_url_loader.dart';
+export 'src/loaders/zip_assets_loader.dart';
+export 'src/loaders/zip_firebase_loader.dart';
+export 'src/loaders/zip_url_loader.dart';
+export 'src/managers/assets_cross_file_manager.dart';
+export 'src/managers/cross_file_manager.dart';
+export 'src/managers/default_value_mix.dart';

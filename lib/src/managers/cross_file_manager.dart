@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
 
-import 'loader.dart';
-import 'log.dart';
+import '../loaders/loader.dart';
+import '../log.dart';
 
 class CrossFileManager {
   static Log log = kDebugMode ? li : liSilent;
@@ -20,7 +20,9 @@ class CrossFileManager {
 
   Future<bool> exists(String path, {List<Loader>? loaders}) async {
     for (final loader in loaders ?? this.loaders) {
+      li('exists($path) with $loader...');
       if (await loader.exists(path)) {
+        li('exists($path) true with $loader.');
         return true;
       }
     }
@@ -31,7 +33,9 @@ class CrossFileManager {
   /// \see [warmUp]
   Future<bool> existsInCache(String path, {List<Loader>? loaders}) async {
     for (final loader in loaders ?? this.loaders) {
+      li('existsInCache($path) with $loader...');
       if (await loader.existsInCache(path)) {
+        li('existsInCache($path) true with $loader.');
         return true;
       }
     }
@@ -43,8 +47,10 @@ class CrossFileManager {
   /// \see [existsInCache]
   Future<bool> warmUp(String path, {List<Loader>? loaders}) async {
     for (final loader in loaders ?? this.loaders) {
+      li('warmUp($path) with $loader...');
       final success = await loader.warmUp(path);
       if (success) {
+        li('warmUp($path) success with $loader.');
         return true;
       }
     }
@@ -54,8 +60,10 @@ class CrossFileManager {
 
   Future<File?> loadFile(String path, {List<Loader>? loaders}) async {
     for (final loader in loaders ?? this.loaders) {
+      li('loadFile($path) with $loader...');
       final r = await loader.loadFile(path);
       if (r != null) {
+        li('loadFile($path) success with $loader: `$r`.');
         return r;
       }
     }
@@ -72,6 +80,7 @@ class CrossFileManager {
     widgets.ImageErrorWidgetBuilder? errorBuilder,
   }) async {
     for (final loader in loaders ?? this.loaders) {
+      li('loadImageWidget($path) with $loader...');
       final r = await loader.loadImageWidget(
         path,
         width: width,
@@ -80,6 +89,7 @@ class CrossFileManager {
         errorBuilder: errorBuilder,
       );
       if (r != null) {
+        li('loadImageWidget($path) success with $loader: `$r`.');
         return r;
       }
     }
@@ -89,8 +99,10 @@ class CrossFileManager {
 
   Future<String?> loadString(String path, {List<Loader>? loaders}) async {
     for (final loader in loaders ?? this.loaders) {
+      li('loadString($path) with $loader...');
       final r = await loader.loadString(path);
       if (r != null) {
+        li('loadString($path) success with $loader: `$r`.');
         return r;
       }
     }
@@ -99,8 +111,9 @@ class CrossFileManager {
   }
 
   Future<void> clearCache() async {
-    log('Purging cache...');
+    log('clearCache()...');
     for (final loader in loaders) {
+      li('clearCache() with $loader.');
       await loader.clearCache();
     }
   }
