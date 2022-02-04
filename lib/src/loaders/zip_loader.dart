@@ -25,8 +25,9 @@ abstract class ZipLoader extends Loader {
     late final File? file;
     try {
       file = await loadFile(path);
-    } on HttpException {
+    } on Exception {
       // it's OK: a state can be 404 or any
+      li("$runtimeType exists() doesn't found `$path`");
       file = null;
     }
 

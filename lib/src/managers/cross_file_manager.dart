@@ -104,6 +104,8 @@ class CrossFileManager {
       if (r != null) {
         li('loadString($path) success with $loader: `$r`.');
         return r;
+      } else {
+        li('loadString($path) fail with $loader.');
       }
     }
 

@@ -45,7 +45,7 @@ abstract class Loader {
   // just touch a file by [path] for store it to cache
   Future<bool> warmUp(String path) async {
     try {
-      return await loadFile(path) != null;
+      return (await loadFile(path)) != null;
     } catch (_) {
       return false;
     }

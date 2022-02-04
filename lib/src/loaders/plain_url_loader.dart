@@ -22,8 +22,9 @@ class PlainUrlLoader extends Loader {
     late final File? file;
     try {
       file = await loadFile(path);
-    } on HttpException {
+    } on Exception {
       // it's OK: a state can be 404 or any
+      li("$runtimeType exists() doesn't found `$path`");
       file = null;
     }
 
@@ -47,8 +48,9 @@ class PlainUrlLoader extends Loader {
 
     try {
       return (await cacheManager.downloadFile(url(path))).file;
-    } on HttpException {
+    } on Exception {
       // it's OK: a state can be 404 or any
+      li("$runtimeType loadFile() doesn't load `$path`");
     }
 
     return null;

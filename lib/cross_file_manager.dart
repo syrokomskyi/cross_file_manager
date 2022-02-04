@@ -1,5 +1,7 @@
 library cross_file_manager;
 
+export 'src/loaders/cached_plain_firebase_loader.dart';
+export 'src/loaders/cached_zip_firebase_loader.dart';
 export 'src/loaders/loader.dart';
 export 'src/loaders/plain_assets_loader.dart';
 export 'src/loaders/plain_firebase_loader.dart';
