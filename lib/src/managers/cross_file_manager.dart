@@ -12,6 +12,7 @@ class CrossFileManager {
 
   final List<Loader> loaders;
 
+  /// \warning Doesn't should be singleton.
   final BaseMemoryCache memoryCache;
 
   CrossFileManager({
@@ -28,37 +29,50 @@ class CrossFileManager {
   }
 
   Future<bool> exists(String path, {List<Loader>? loaders}) async {
-    if (await memoryCache.exists(path)) {
-      return true;
+    if (loaders == null) {
+      li('exists($path) look at into the memory cache...');
+      final r = await memoryCache.exists(path);
+      if (r != null) {
+        li('exists($path) return from memory cache');
+        return r;
+      }
     }
 
     for (final loader in loaders ?? this.loaders) {
       li('exists($path) with $loader...');
       if (await loader.exists(path)) {
         li('exists($path) true with $loader.');
-        await memoryCache.addExists(path);
+        await memoryCache.addExists(path, true);
         return true;
       }
     }
+
+    await memoryCache.addExists(path, false);
 
     return false;
   }
 
   /// \see [warmUp]
   Future<bool> existsInCache(String path, {List<Loader>? loaders}) async {
-    if (await memoryCache.exists(path)) {
-      li('existsInCache($path) return from memory cache');
-      return true;
+    if (loaders == null) {
+      li('existsInCache($path) look at into the memory cache...');
+      final r = await memoryCache.exists(path);
+      if (r != null) {
+        li('existsInCache($path) return from memory cache');
+        return r;
+      }
     }
 
     for (final loader in loaders ?? this.loaders) {
       li('existsInCache($path) with $loader...');
       if (await loader.existsInCache(path)) {
         li('existsInCache($path) true with $loader.');
-        await memoryCache.addExists(path);
+        await memoryCache.addExists(path, true);
         return true;
       }
     }
+
+    await memoryCache.addExists(path, false);
 
     return false;
   }
@@ -66,17 +80,11 @@ class CrossFileManager {
   /// Just add [path] to cache for fast access in the future.
   /// \see [existsInCache]
   Future<bool> warmUp(String path, {List<Loader>? loaders}) async {
-    if (await memoryCache.hasWarmUp(path)) {
-      li('warmUp($path) warmed up, detected by memory cache');
-      return true;
-    }
-
     for (final loader in loaders ?? this.loaders) {
       li('warmUp($path) with $loader...');
       final success = await loader.warmUp(path);
       if (success) {
         li('warmUp($path) success with $loader.');
-        await memoryCache.addHasWarmUp(path);
         return true;
       }
     }
@@ -85,10 +93,13 @@ class CrossFileManager {
   }
 
   Future<File?> loadFile(String path, {List<Loader>? loaders}) async {
-    final r = await memoryCache.getFile(path);
-    if (r != null) {
-      li('loadFile($path) return from memory cache');
-      return r;
+    if (loaders == null) {
+      li('loadFile($path) look at into the memory cache...');
+      final r = await memoryCache.getFile(path);
+      if (r != null) {
+        li('loadFile($path) return from memory cache');
+        return r;
+      }
     }
 
     for (final loader in loaders ?? this.loaders) {
@@ -112,10 +123,13 @@ class CrossFileManager {
     widgets.BoxFit? fit,
     widgets.ImageErrorWidgetBuilder? errorBuilder,
   }) async {
-    final r = await memoryCache.getImageWidget(path);
-    if (r != null) {
-      li('loadImageWidget($path) return from memory cache');
-      return r;
+    if (loaders == null) {
+      li('loadImageWidget($path) look at into the memory cache...');
+      final r = await memoryCache.getImageWidget(path);
+      if (r != null) {
+        li('loadImageWidget($path) return from memory cache');
+        return r;
+      }
     }
 
     for (final loader in loaders ?? this.loaders) {
@@ -138,10 +152,13 @@ class CrossFileManager {
   }
 
   Future<String?> loadString(String path, {List<Loader>? loaders}) async {
-    final r = await memoryCache.getString(path);
-    if (r != null) {
-      li('loadString($path) return from memory cache');
-      return r;
+    if (loaders == null) {
+      li('loadString($path) look at into the memory cache...');
+      final r = await memoryCache.getString(path);
+      if (r != null) {
+        li('loadString($path) return from memory cache');
+        return r;
+      }
     }
 
     for (final loader in loaders ?? this.loaders) {

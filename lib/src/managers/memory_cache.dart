@@ -5,35 +5,38 @@ import 'package:flutter/widgets.dart' as widgets;
 import 'package:stash/stash_api.dart';
 import 'package:stash_memory/stash_memory.dart';
 
-final _store = newMemoryCacheStore();
-
 /// Memorize all data which was requested and saved to local.
 abstract class BaseMemoryCache {
+  final MemoryCacheStore _store;
+
   // \todo Define limits into the config.
   // \todo Wrap to own Cache<T>?
   @protected
-  final cacheExists = _store.cache<bool>(name: 'exists', maxEntries: 400);
+  late final Cache<bool?> cacheExists;
 
   @protected
-  final cacheWarmUp = _store.cache<bool>(name: 'warm_up', maxEntries: 400);
+  late final Cache<bool?> cacheWarmUp;
 
   @protected
-  final cacheFile = _store.cache<File?>(name: 'file', maxEntries: 50);
+  late final Cache<File?> cacheFile;
 
   @protected
-  final cacheImageWidget =
-      _store.cache<widgets.Widget?>(name: 'image_widget', maxEntries: 50);
+  late final Cache<widgets.Widget?> cacheImageWidget;
 
   @protected
-  final cacheString = _store.cache<String>(name: 'string', maxEntries: 100);
+  late final Cache<String?> cacheString;
 
-  Future<bool> exists(String path);
+  BaseMemoryCache() : _store = newMemoryCacheStore() {
+    cacheExists = _store.cache<bool>(name: 'exists', maxEntries: 400);
+    cacheFile = _store.cache<File?>(name: 'file', maxEntries: 50);
+    cacheImageWidget =
+        _store.cache<widgets.Widget?>(name: 'image_widget', maxEntries: 50);
+    cacheString = _store.cache<String>(name: 'string', maxEntries: 100);
+  }
 
-  Future<void> addExists(String path);
+  Future<bool?> exists(String path);
 
-  Future<bool> hasWarmUp(String path);
-
-  Future<void> addHasWarmUp(String path);
+  Future<void> addExists(String path, bool r);
 
   Future<File?> getFile(String path);
 
@@ -52,20 +55,11 @@ abstract class BaseMemoryCache {
 
 class MemoryCache extends BaseMemoryCache {
   @override
-  Future<bool> exists(String path) async =>
-      (await cacheExists.get(path)) ?? false;
+  Future<bool?> exists(String path) async => cacheExists.get(path);
 
   @override
-  Future<void> addExists(String path) async =>
-      cacheExists.putIfAbsent(path, true);
-
-  @override
-  Future<bool> hasWarmUp(String path) async =>
-      (await cacheWarmUp.get(path)) ?? false;
-
-  @override
-  Future<void> addHasWarmUp(String path) async =>
-      cacheWarmUp.putIfAbsent(path, true);
+  Future<void> addExists(String path, bool r) async =>
+      cacheExists.putIfAbsent(path, r);
 
   @override
   Future<File?> getFile(String path) async => cacheFile.get(path);
@@ -95,31 +89,25 @@ class MemoryCache extends BaseMemoryCache {
 
 class FakeMemoryCache extends BaseMemoryCache {
   @override
-  Future<bool> exists(String path) async => false;
+  Future<bool?> exists(String path) async => null;
 
   @override
-  Future<void> addExists(String path) async {}
+  Future<void> addExists(String path, bool r) async {}
 
   @override
-  Future<bool> hasWarmUp(String path) async => false;
-
-  @override
-  Future<void> addHasWarmUp(String path) async {}
-
-  @override
-  Future<File?> getFile(String path) async {}
+  Future<File?> getFile(String path) async => null;
 
   @override
   Future<void> addFile(String path, File r) async {}
 
   @override
-  Future<widgets.Widget?> getImageWidget(String path) async {}
+  Future<widgets.Widget?> getImageWidget(String path) async => null;
 
   @override
   Future<void> addImageWidget(String path, widgets.Widget r) async {}
 
   @override
-  Future<String?> getString(String path) async {}
+  Future<String?> getString(String path) async => null;
 
   @override
   Future<void> addString(String path, String r) async {}
