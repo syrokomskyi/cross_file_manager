@@ -17,6 +17,7 @@ dependencies:
   flutter_cache_manager_firebase: ^2.0.1
   path: ^1.8.0
   path_provider: ^2.0.8
+  stash_memory: ^4.0.1
 
 dev_dependencies:
   flutter_lints: ^1.0.0
