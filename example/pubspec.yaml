@@ -2,13 +2,13 @@ name: example_cross_file_manager
 description: An example for CrossFileManager.
 homepage: https://github.com/signmotion/cross_file_manager
 
-version: 0.1.0+100
+version: 0.2.0+200
 
 publish_to: none
 
 environment:
-  flutter: '>=2.8.1 <3.0.0'
-  sdk: '>=2.15.1 <3.0.0'
+  flutter: '>=2.10.0 <3.0.0'
+  sdk: '>=2.16.0 <3.0.0'
 
 dependencies:
   cross_file_manager:
