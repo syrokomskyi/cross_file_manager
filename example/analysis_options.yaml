@@ -15,6 +15,11 @@ analyzer:
     - lib/**.g.dart
     - lib/l10n/**
 
+  errors:
+    invalid_assignment: warning
+    missing_return: error
+    dead_code: info
+
 linter:
   rules:
     - always_declare_return_types
