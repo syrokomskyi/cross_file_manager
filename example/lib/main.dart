@@ -177,7 +177,7 @@ class _PageState extends State<Page> {
   List<Widget> view(
     String title,
     String path,
-    dynamic data, {
+    Future<dynamic> data, {
     String archive = '',
   }) =>
       [
