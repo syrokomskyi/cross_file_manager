@@ -11,7 +11,9 @@ analyzer:
   plugins:
     - dart_code_metrics
 
-  exclude: [ build/**, lib/**.g.dart ]
+  exclude:
+    - lib/**.g.dart
+    - lib/l10n/**
 
 linter:
   rules:
