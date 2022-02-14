@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/widgets.dart' as widgets;
-import 'package:path/path.dart' as p;
+import 'package:path/path.dart' as pp;
 
 import 'loader.dart';
 
@@ -31,11 +31,11 @@ class PlainAssetsLoader extends Loader {
 
     final bytes = await rootBundle.load(path);
 
-    final pathToFile = p.join(await localPath, path);
+    final pathToFile = pp.join(await localPath, path);
     final file = File(pathToFile);
     final prepared =
         bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
-    final dir = p.dirname(pathToFile);
+    final dir = pp.dirname(pathToFile);
     Directory(dir).createSync(recursive: true);
     await file.writeAsBytes(prepared);
 
