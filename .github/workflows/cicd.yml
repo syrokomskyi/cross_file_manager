@@ -3,9 +3,9 @@ name: cicd
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
-    types: 
+    types:
       - opened
       - reopened
       - synchronize
