@@ -12,6 +12,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) => const MaterialApp(
         title: 'CrossFileManager Demo',
         home: Page(),
+        debugShowCheckedModeBanner: false,
       );
 }
 
