@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart' as widgets;
 void main() => runApp(const App());
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   // This widget is the root of your application.
   @override
@@ -17,7 +17,7 @@ class App extends StatelessWidget {
 }
 
 class Page extends StatefulWidget {
-  const Page({Key? key}) : super(key: key);
+  const Page({super.key});
 
   @override
   State<Page> createState() => _PageState();
