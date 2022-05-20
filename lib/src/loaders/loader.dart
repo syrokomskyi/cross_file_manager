@@ -60,13 +60,26 @@ abstract class Loader {
 
   Future<String?> loadString(String path);
 
-  Future<widgets.Widget?> loadImageWidget(
+  Future<widgets.Image?> loadImageWidget(
     String path, {
     double? width,
     double? height,
     widgets.BoxFit? fit,
     widgets.ImageErrorWidgetBuilder? errorBuilder,
   });
+
+  Future<ui.Image?> loadImageUi(String path) async {
+    final file = await loadFile(path);
+    if (file == null) {
+      return null;
+    }
+
+    final bytes = file.readAsBytesSync();
+    final codec = await ui.instantiateImageCodec(bytes);
+    final frameInfo = await codec.getNextFrame();
+
+    return frameInfo.image;
+  }
 
   /// \see [localPath]
   /// \see [temporaryFolder]

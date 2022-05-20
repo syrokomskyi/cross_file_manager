@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
@@ -21,7 +22,10 @@ abstract class BaseMemoryCache {
   late final Cache<File?> cacheFile;
 
   @protected
-  late final Cache<widgets.Widget?> cacheImageWidget;
+  late final Cache<widgets.Image?> cacheImageWidget;
+
+  @protected
+  late final Cache<ui.Image?> cacheImageUi;
 
   @protected
   late final Cache<String?> cacheString;
@@ -30,7 +34,8 @@ abstract class BaseMemoryCache {
     cacheExists = _store.cache<bool>(name: 'exists', maxEntries: 400);
     cacheFile = _store.cache<File?>(name: 'file', maxEntries: 50);
     cacheImageWidget =
-        _store.cache<widgets.Widget?>(name: 'image_widget', maxEntries: 50);
+        _store.cache<widgets.Image?>(name: 'image_widget', maxEntries: 50);
+    cacheImageUi = _store.cache<ui.Image?>(name: 'image_ui', maxEntries: 50);
     cacheString = _store.cache<String>(name: 'string', maxEntries: 100);
   }
 
@@ -42,9 +47,13 @@ abstract class BaseMemoryCache {
 
   Future<void> addFile(String path, File r);
 
-  Future<widgets.Widget?> getImageWidget(String path);
+  Future<widgets.Image?> getImageWidget(String path);
 
-  Future<void> addImageWidget(String path, widgets.Widget r);
+  Future<void> addImageWidget(String path, widgets.Image r);
+
+  Future<ui.Image?> getImageUi(String path);
+
+  Future<void> addImageUi(String path, ui.Image r);
 
   Future<String?> getString(String path);
 
@@ -69,12 +78,19 @@ class MemoryCache extends BaseMemoryCache {
       cacheFile.putIfAbsent(path, r);
 
   @override
-  Future<widgets.Widget?> getImageWidget(String path) async =>
+  Future<widgets.Image?> getImageWidget(String path) async =>
       cacheImageWidget.get(path);
 
   @override
-  Future<void> addImageWidget(String path, widgets.Widget r) async =>
+  Future<void> addImageWidget(String path, widgets.Image r) async =>
       cacheImageWidget.putIfAbsent(path, r);
+
+  @override
+  Future<ui.Image?> getImageUi(String path) async => cacheImageUi.get(path);
+
+  @override
+  Future<void> addImageUi(String path, ui.Image r) async =>
+      cacheImageUi.putIfAbsent(path, r);
 
   @override
   Future<String?> getString(String path) async => cacheString.get(path);
@@ -101,10 +117,16 @@ class FakeMemoryCache extends BaseMemoryCache {
   Future<void> addFile(String path, File r) async {}
 
   @override
-  Future<widgets.Widget?> getImageWidget(String path) async => null;
+  Future<widgets.Image?> getImageWidget(String path) async => null;
 
   @override
-  Future<void> addImageWidget(String path, widgets.Widget r) async {}
+  Future<void> addImageWidget(String path, widgets.Image r) async {}
+
+  @override
+  Future<ui.Image?> getImageUi(String path) async => null;
+
+  @override
+  Future<void> addImageUi(String path, ui.Image r) async {}
 
   @override
   Future<String?> getString(String path) async => null;

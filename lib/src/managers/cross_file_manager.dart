@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
@@ -115,7 +116,7 @@ class CrossFileManager {
     return null;
   }
 
-  Future<widgets.Widget?> loadImageWidget(
+  Future<widgets.Image?> loadImageWidget(
     String path, {
     List<Loader>? loaders,
     double? width,
@@ -144,6 +145,32 @@ class CrossFileManager {
       if (r != null) {
         log('loadImageWidget($path) success with $loader: `$r`.');
         await memoryCache.addImageWidget(path, r);
+        return r;
+      }
+    }
+
+    return null;
+  }
+
+  Future<ui.Image?> loadImageUi(
+    String path, {
+    List<Loader>? loaders,
+  }) async {
+    if (loaders == null) {
+      log('loadImageUi($path) look at into the memory cache...');
+      final r = await memoryCache.getImageUi(path);
+      if (r != null) {
+        log('loadImageUi($path) return from memory cache');
+        return r;
+      }
+    }
+
+    for (final loader in loaders ?? this.loaders) {
+      log('loadImageUi($path) with $loader...');
+      final r = await loader.loadImageUi(path);
+      if (r != null) {
+        log('loadImageUi($path) success with $loader: `$r`.');
+        await memoryCache.addImageUi(path, r);
         return r;
       }
     }

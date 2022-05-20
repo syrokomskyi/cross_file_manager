@@ -107,7 +107,7 @@ abstract class ZipLoader extends Loader {
   }
 
   @override
-  Future<widgets.Widget?> loadImageWidget(
+  Future<widgets.Image?> loadImageWidget(
     String path, {
     double? width,
     double? height,
