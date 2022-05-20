@@ -3,15 +3,20 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
+import '../log.dart';
+
 abstract class Loader {
-  const Loader();
+  final Log log;
+
+  const Loader({
+    this.log = kDebugMode ? li : liSilent,
+  });
 
   /// Overwrite this when a custom loader using a cache.
   /// \see [clearCache]

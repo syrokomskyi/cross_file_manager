@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:path/path.dart' as p;
 
-import '../log.dart';
 import 'loader.dart';
 
 abstract class ZipLoader extends Loader {
@@ -27,7 +26,7 @@ abstract class ZipLoader extends Loader {
       file = await loadFile(path);
     } on Exception {
       // it's OK: a state can be 404 or any
-      li("$runtimeType exists() doesn't found `$path`");
+      log("$runtimeType exists() doesn't found `$path`");
       file = null;
     }
 
@@ -45,7 +44,7 @@ abstract class ZipLoader extends Loader {
     );
     */
 
-    li('$runtimeType loadFile path `$path`');
+    log('$runtimeType loadFile path `$path`');
 
     // direct verify into the url path (was copied below)
     final localPathToFile = p.join(await localPath, path);
@@ -62,10 +61,10 @@ abstract class ZipLoader extends Loader {
     for (var i = splits.length - 1; i > 0; --i) {
       final subSplits = splits.sublist(0, i);
       subPath = '${p.joinAll(subSplits)}.zip';
-      li('$runtimeType subPath `$subPath` for search `$path`');
+      log('$runtimeType subPath `$subPath` for search `$path`');
       if (await sourceLoader.exists(subPath)) {
         final subFile = await sourceLoader.loadFile(subPath);
-        li('$runtimeType subFile from assets `$subFile`');
+        log('$runtimeType subFile from assets `$subFile`');
         if (subFile?.existsSync() ?? false) {
           foundFile = subFile;
           break;
@@ -74,34 +73,34 @@ abstract class ZipLoader extends Loader {
     }
 
     if (foundFile == null) {
-      li('$runtimeType not found file by path segments $splits');
+      log('$runtimeType not found file by path segments $splits');
       return null;
     } else {
-      li('$runtimeType found file `$foundFile` by path segments $splits');
+      log('$runtimeType found file `$foundFile` by path segments $splits');
     }
 
     // extract all files from archive
     final bytes = foundFile.readAsBytesSync();
-    li('$runtimeType file size `${bytes.length}` bytes');
+    log('$runtimeType file size `${bytes.length}` bytes');
     final archive = ZipDecoder().decodeBytes(bytes);
     final baseOutPath = p.dirname(p.join(await localPath, subPath));
-    li('$runtimeType baseOutPath $baseOutPath');
+    log('$runtimeType baseOutPath $baseOutPath');
     for (final file in archive) {
-      li('$runtimeType file `$file`');
+      log('$runtimeType file `$file`');
       final out = p.join(baseOutPath, file.name);
       if (file.isFile) {
-        li('$runtimeType getting content from `${file.name}` to `$out`');
+        log('$runtimeType getting content from `${file.name}` to `$out`');
         final data = file.content as List<int>;
         File(out)
           ..createSync(recursive: true)
           ..writeAsBytesSync(data);
       } else {
-        li('$runtimeType create directory `$out`');
+        log('$runtimeType create directory `$out`');
         Directory(out).createSync(recursive: true);
       }
     }
 
-    li('$runtimeType localPathToFile `$localPathToFile`');
+    log('$runtimeType localPathToFile `$localPathToFile`');
     file = File(localPathToFile);
 
     return file.existsSync() ? file : null;

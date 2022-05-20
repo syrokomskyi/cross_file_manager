@@ -1,11 +1,10 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_cache_manager_firebase/flutter_cache_manager_firebase.dart';
 
-import '../log.dart';
-import '../managers/cross_file_manager.dart';
 import 'loader.dart';
 
 class PlainFirebaseLoader extends Loader {
@@ -23,7 +22,7 @@ class PlainFirebaseLoader extends Loader {
       file = await loadFile(path);
     } on Exception {
       // it's OK: a state can be 404 or any
-      li("$runtimeType exists() doesn't found `$path`");
+      log("$runtimeType exists() doesn't found `$path`");
       file = null;
     }
 
@@ -34,7 +33,7 @@ class PlainFirebaseLoader extends Loader {
   Future<File?> loadFile(String path) async {
     assert(path.isNotEmpty);
 
-    CacheManager.logLevel = CrossFileManager.log == li
+    CacheManager.logLevel = kDebugMode
         ? CacheManagerLogLevel.verbose
         : CacheManagerLogLevel.warning;
 
@@ -49,7 +48,7 @@ class PlainFirebaseLoader extends Loader {
       return (await cacheManager.downloadFile(path)).file;
     } on Exception {
       // it's OK: a state can be 404 or any
-      li("$runtimeType loadFile() doesn't load `$path`");
+      log("$runtimeType loadFile() doesn't load `$path`");
     }
 
     return null;
