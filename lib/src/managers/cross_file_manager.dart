@@ -2,31 +2,51 @@ import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart' as widgets;
 
+import '../../cross_file_manager.dart';
 import '../loaders/loader.dart';
 import '../log.dart';
 import 'memory_cache.dart';
 
+/// \see [assetsCrossFileManager] and [assetsCrossFileManager] for example.
 class CrossFileManager {
+  static const defImageWidget = Icon(Icons.image, color: Colors.indigoAccent);
+  static const defString = '';
+
   final List<Loader> loaders;
   final Log log;
 
   /// \warning Doesn't should be singleton.
   final BaseMemoryCache memoryCache;
 
-  CrossFileManager({
-    required this.loaders,
+  static Future<CrossFileManager> create({
+    required List<Loader> loaders,
     bool useMemoryCache = true,
     bool needClearCache = false,
+    Log log = kDebugMode ? li : liSilent,
+  }) async {
+    final instance = CrossFileManager._create(
+      loaders: loaders,
+      useMemoryCache: useMemoryCache,
+      log: log,
+    );
+
+    if (needClearCache) {
+      await instance.clearCache();
+    }
+
+    return instance;
+  }
+
+  CrossFileManager._create({
+    required this.loaders,
+    bool useMemoryCache = true,
     this.log = kDebugMode ? li : liSilent,
   })  : assert(loaders.isNotEmpty),
         memoryCache = useMemoryCache ? MemoryCache() : FakeMemoryCache() {
-    log('started with `useMemoryCache` $useMemoryCache'
-        ' `needClearCache` $needClearCache');
-    if (needClearCache) {
-      clearCache();
-    }
+    log('started with `useMemoryCache` $useMemoryCache');
   }
 
   Future<bool> exists(String path, {List<Loader>? loaders}) async {
@@ -152,6 +172,25 @@ class CrossFileManager {
     return null;
   }
 
+  Future<widgets.Widget> loadImageWidgetOrDefault(
+    String path, {
+    List<Loader>? loaders,
+    double? width,
+    double? height,
+    widgets.BoxFit? fit,
+    widgets.Image? def,
+  }) async =>
+      await loadImageWidget(
+        path,
+        loaders: loaders,
+        width: width,
+        height: height,
+        fit: fit,
+        errorBuilder: (context, error, stack) => def ?? defImageWidget,
+      ) ??
+      def ??
+      defImageWidget;
+
   Future<ui.Image?> loadImageUi(
     String path, {
     List<Loader>? loaders,
@@ -202,6 +241,13 @@ class CrossFileManager {
 
     return null;
   }
+
+  Future<String> loadStringOrDefault(
+    String path, {
+    List<Loader>? loaders,
+    String? def,
+  }) async =>
+      await loadString(path, loaders: loaders) ?? def ?? defString;
 
   Future<void> clearCache() async {
     log('clearCache()...');

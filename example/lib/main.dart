@@ -24,17 +24,22 @@ class Page extends StatefulWidget {
 }
 
 class _PageState extends State<Page> {
-  AppCrossFileManager get fm => AppCrossFileManager();
+  late final CrossFileManager fm;
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) => FutureBuilder<CrossFileManager>(
+        future: assetsCrossFileManager,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            fm = snapshot.data!;
+            return _build();
+          }
 
-    fm.clearCache();
-  }
+          return Container();
+        },
+      );
 
-  @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget _build() => Scaffold(
         appBar: AppBar(title: const Text('Priority File Detection')),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -51,28 +56,28 @@ class _PageState extends State<Page> {
       );
 
   /// Get from local assets.
-  /// \see [AppCrossFileManager] with [PlainAssetsLoader]
+  /// \see [appCrossFileManager] with [PlainAssetsLoader]
   List<Widget> get plainAssetsDemo => [
         ...subtitle('plain assets path'),
         ...gettingPlain(),
       ];
 
   /// Extract from zip-files.
-  /// \see [AppCrossFileManager] with [ZipAssetsLoader]
+  /// \see [appCrossFileManager] with [ZipAssetsLoader]
   List<Widget> get zipAssetsDemo => [
         ...subtitle('zip assets path'),
         ...gettingArchive('2'),
       ];
 
   /// Download from Internet.
-  /// \see [AppCrossFileManager] with [PlainUrlLoader]
+  /// \see [appCrossFileManager] with [PlainUrlLoader]
   List<Widget> get plainUrlDemo => [
         ...subtitle('plain url path'),
         ...gettingPlain(),
       ];
 
   /// Download from Internet a preferred zip-file and extract requested file from it.
-  /// \see [AppCrossFileManager] with [ZipUrlLoader]
+  /// \see [appCrossFileManager] with [ZipUrlLoader]
   List<Widget> get zipUrlDemo => [
         ...subtitle('zip url path'),
         ...gettingArchive('2', loaders: const [ZipUrlLoader(base: url)]),
@@ -246,20 +251,15 @@ class _PageState extends State<Page> {
 const url =
     'https://raw.githubusercontent.com/signmotion/cross_file_manager/master/example/';
 
-class AppCrossFileManager extends CrossFileManager with DefaultValueMix {
-  static final _instance = AppCrossFileManager._();
+/// \see [AssetsCrossFileManager] for singleton implementation.
+final appCrossFileManager = CrossFileManager.create(
+  loaders: const [
+    PlainAssetsLoader(),
+    ZipAssetsLoader(),
+    PlainUrlLoader(base: url),
 
-  factory AppCrossFileManager() {
-    return _instance;
-  }
-
-  AppCrossFileManager._()
-      : super(loaders: const [
-          PlainAssetsLoader(),
-          ZipAssetsLoader(),
-          PlainUrlLoader(base: url),
-
-          /// \see [zipUrlDemo]
-          // ZipUrlLoader(base: url),
-        ]);
-}
+    /// \see [zipUrlDemo]
+    // ZipUrlLoader(base: url),
+  ],
+  needClearCache: true,
+);

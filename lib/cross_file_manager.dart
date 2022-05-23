@@ -13,4 +13,3 @@ export 'src/loaders/zip_firebase_loader.dart';
 export 'src/loaders/zip_url_loader.dart';
 export 'src/managers/assets_cross_file_manager.dart';
 export 'src/managers/cross_file_manager.dart';
-export 'src/managers/default_value_mix.dart';
