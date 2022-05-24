@@ -59,7 +59,7 @@ abstract class BaseMemoryCache {
 
   Future<void> addString(String path, String r);
 
-  Future<void> clear();
+  Future<void> clear() async => _store.deleteAll();
 }
 
 class MemoryCache extends BaseMemoryCache {
@@ -98,9 +98,6 @@ class MemoryCache extends BaseMemoryCache {
   @override
   Future<void> addString(String path, String r) async =>
       cacheString.putIfAbsent(path, r);
-
-  @override
-  Future<void> clear() async => _store.deleteAll();
 }
 
 class FakeMemoryCache extends BaseMemoryCache {
@@ -133,7 +130,4 @@ class FakeMemoryCache extends BaseMemoryCache {
 
   @override
   Future<void> addString(String path, String r) async {}
-
-  @override
-  Future<void> clear() async {}
 }
