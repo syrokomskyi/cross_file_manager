@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart' as widgets;
 
 import '../../cross_file_manager.dart';
-import '../loaders/loader.dart';
-import '../log.dart';
 import 'memory_cache.dart';
 
 /// \see [assetsCrossFileManager] and [assetsCrossFileManager] for example.
