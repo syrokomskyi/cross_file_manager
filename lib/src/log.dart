@@ -1,7 +1,6 @@
 typedef Log = void Function(String);
 
-void li(String s) {
-  print(s);
-}
+/// U+1F343
+void li(String s) => print('🍃 $s');
 
 void liSilent(String s) {}
