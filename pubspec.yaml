@@ -6,8 +6,8 @@ version: 0.1.0+100
 
 
 environment:
-  flutter: '>=2.10.2 <3.0.0'
-  sdk: '>=2.17.0 <3.0.0'
+  flutter: '>=3.0.2 <4.0.0'
+  sdk: '>=2.17.3 <3.0.0'
 
 dependencies:
   archive: ^3.3.0
@@ -16,7 +16,7 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   flutter_cache_manager_firebase: ^2.0.1
   path: ^1.8.0
-  path_provider: ^2.0.10
+  path_provider: ^2.0.11
   stash_memory: ^4.0.1
 
 dev_dependencies:
