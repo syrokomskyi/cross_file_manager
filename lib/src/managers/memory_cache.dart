@@ -7,8 +7,9 @@ import 'package:stash/stash_api.dart';
 import 'package:stash_memory/stash_memory.dart';
 
 /// Memorize all data which was requested and saved to local.
+/// \warning Run `initOnce()` for initialize instance.
 abstract class BaseMemoryCache {
-  final MemoryCacheStore _store;
+  late final MemoryCacheStore _store;
 
   // \todo Define limits into the config.
   // \todo Wrap to own Cache<T>?
@@ -30,13 +31,25 @@ abstract class BaseMemoryCache {
   @protected
   late final Cache<String?> cacheString;
 
-  BaseMemoryCache() : _store = newMemoryCacheStore() {
-    cacheExists = _store.cache<bool>(name: 'exists', maxEntries: 400);
-    cacheFile = _store.cache<File?>(name: 'file', maxEntries: 50);
-    cacheImageWidget =
-        _store.cache<widgets.Image?>(name: 'image_widget', maxEntries: 50);
-    cacheImageUi = _store.cache<ui.Image?>(name: 'image_ui', maxEntries: 50);
-    cacheString = _store.cache<String>(name: 'string', maxEntries: 100);
+  BaseMemoryCache();
+
+  bool _initOnce = false;
+
+  Future<void> initOnce() async {
+    if (_initOnce) {
+      return;
+    }
+
+    _initOnce = true;
+
+    _store = await newMemoryCacheStore();
+    cacheExists = await _store.cache<bool>(name: 'exists', maxEntries: 400);
+    cacheFile = await _store.cache<File?>(name: 'file', maxEntries: 50);
+    cacheImageWidget = await _store.cache<widgets.Image?>(
+        name: 'image_widget', maxEntries: 50);
+    cacheImageUi =
+        await _store.cache<ui.Image?>(name: 'image_ui', maxEntries: 50);
+    cacheString = await _store.cache<String>(name: 'string', maxEntries: 100);
   }
 
   Future<bool?> exists(String path);

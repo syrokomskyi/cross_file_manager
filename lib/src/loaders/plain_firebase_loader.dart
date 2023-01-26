@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_cache_manager_firebase/flutter_cache_manager_firebase.dart';
+//import 'package:flutter_cache_manager_firebase/flutter_cache_manager_firebase.dart';
 
 import 'loader.dart';
 
@@ -11,7 +11,8 @@ class PlainFirebaseLoader extends Loader {
   const PlainFirebaseLoader();
 
   @override
-  CacheManager get cacheManager => FirebaseCacheManager();
+  // TODO CacheManager get cacheManager => FirebaseCacheManager(); - We have a problem with https://stackoverflow.com/questions/74226250/error-member-not-found-firebaseappplatform-verifyextends
+  CacheManager get cacheManager => throw 'Not implemented';
 
   @override
   Future<bool> exists(String path) async {

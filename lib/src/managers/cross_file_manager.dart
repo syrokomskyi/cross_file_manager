@@ -31,6 +31,8 @@ class CrossFileManager {
       log: log,
     );
 
+    await instance.memoryCache.initOnce();
+
     if (needClearCache) {
       await instance.clearCache();
     }
