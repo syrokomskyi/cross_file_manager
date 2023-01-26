@@ -19,6 +19,8 @@ class CrossFileManager {
   /// \warning Doesn't should be singleton.
   final BaseMemoryCache memoryCache;
 
+  final bool useMemoryCache;
+
   static Future<CrossFileManager> create({
     required List<Loader> loaders,
     bool useMemoryCache = true,
@@ -42,7 +44,7 @@ class CrossFileManager {
 
   CrossFileManager._create({
     required this.loaders,
-    bool useMemoryCache = true,
+    this.useMemoryCache = true,
     this.log = kDebugMode ? li : liSilent,
   })  : assert(loaders.isNotEmpty),
         memoryCache = useMemoryCache ? MemoryCache() : FakeMemoryCache() {
@@ -50,7 +52,7 @@ class CrossFileManager {
   }
 
   Future<bool> exists(String path, {List<Loader>? loaders}) async {
-    if (loaders == null) {
+    if (loaders == null && useMemoryCache) {
       log('exists($path) look at into the memory cache...');
       final r = await memoryCache.exists(path);
       if (r != null) {
@@ -75,7 +77,7 @@ class CrossFileManager {
 
   /// \see [warmUp]
   Future<bool> existsInCache(String path, {List<Loader>? loaders}) async {
-    if (loaders == null) {
+    if (loaders == null && useMemoryCache) {
       log('existsInCache($path) look at into the memory cache...');
       final r = await memoryCache.exists(path);
       if (r != null) {
@@ -114,7 +116,7 @@ class CrossFileManager {
   }
 
   Future<File?> loadFile(String path, {List<Loader>? loaders}) async {
-    if (loaders == null) {
+    if (loaders == null && useMemoryCache) {
       log('loadFile($path) look at into the memory cache...');
       final r = await memoryCache.getFile(path);
       if (r != null) {
@@ -144,7 +146,7 @@ class CrossFileManager {
     widgets.BoxFit? fit,
     widgets.ImageErrorWidgetBuilder? errorBuilder,
   }) async {
-    if (loaders == null) {
+    if (loaders == null && useMemoryCache) {
       log('loadImageWidget($path) look at into the memory cache...');
       final r = await memoryCache.getImageWidget(path);
       if (r != null) {
@@ -195,7 +197,7 @@ class CrossFileManager {
     String path, {
     List<Loader>? loaders,
   }) async {
-    if (loaders == null) {
+    if (loaders == null && useMemoryCache) {
       log('loadImageUi($path) look at into the memory cache...');
       final r = await memoryCache.getImageUi(path);
       if (r != null) {
@@ -218,7 +220,7 @@ class CrossFileManager {
   }
 
   Future<String?> loadString(String path, {List<Loader>? loaders}) async {
-    if (loaders == null) {
+    if (loaders == null && useMemoryCache) {
       log('loadString($path) look at into the memory cache...');
       final r = await memoryCache.getString(path);
       if (r != null) {
