@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart' as widgets;
 import '../../cross_file_manager.dart';
 import 'memory_cache.dart';
 
-/// \see [assetsCrossFileManager] and [assetsCrossFileManager] for example.
+/// \see [assetsCrossFileManager] and [AssetsCrossFileManager] for example.
 class CrossFileManager {
   static const defImageWidget = Icon(Icons.image, color: Colors.indigoAccent);
   static const defString = '';
