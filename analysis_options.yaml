@@ -9,7 +9,7 @@ analyzer:
   plugins:
     - dart_code_metrics
 
-  exclude: [ build/**, lib/**.g.dart ]
+  exclude: [build/**, lib/**.g.dart]
 
 linter:
   rules:
@@ -55,7 +55,6 @@ linter:
     - file_names
     - hash_and_equals
     - implementation_imports
-    - invariant_booleans
     - iterable_contains_unrelated_type
     - join_return_with_assignment
     - library_names
