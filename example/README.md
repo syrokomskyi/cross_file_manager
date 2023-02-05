@@ -1,6 +1,6 @@
 # example
 
-A new Flutter project.
+The example for [CrossFileManager](https://github.com/signmotion/cross_file_manager).
 
 ## Getting Started
 
