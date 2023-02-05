@@ -11,7 +11,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - Truncated long strings for log output.
 - Upgraded dependencies.
 
-# 0.2.0
+## 0.2.0
 
 - Added PlainFileLoader and ZipFileLoader.
 - Implemented a load image into the format dart:ui.
