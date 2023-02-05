@@ -1,11 +1,12 @@
 name: cross_file_manager
 description: Can read files from assets, Internet (by URL), zip archives by loader priority.
 homepage: https://github.com/signmotion/cross_file_manager
+publish_to: https://pub.dev/
 
-version: 0.3.0+300
+version: 0.3.0
 
 environment:
-  flutter: ">=3.0.2 <4.0.0"
+  flutter: ">=3.0.2"
   sdk: ">=2.17.3 <3.0.0"
 
 dependencies:
@@ -16,6 +17,7 @@ dependencies:
   #flutter_cache_manager_firebase: ^2.0.1
   path: ^1.8.2
   path_provider: ^2.0.12
+  stash: ^4.5.0
   stash_memory: ^4.5.0
 
 dev_dependencies:
