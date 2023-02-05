@@ -6,16 +6,18 @@ Transparent reading of files wherever they are located: assets, Internet (by URL
 
 You can choose the priority for uploaders yourself. For example, if the file is not in the assets, an attempt will be made to get the file from the cloud.
 
+You can develop own loader for download files from Firebase, Firestore, Amazon AWS, Google Drive, Microsoft Azure Cloud Storage, OneDrive, Dropbox, etc. - any data source can be included in the CrossFileManager. See `class Loader` and [already implemented loaders](https://github.com/signmotion/cross_file_manager/tree/master/lib/src/loaders).
+
 Can retrieve the needed file from an archive. It comes in handy when you need to download thousands of small files.
 
 Can memorize a received file and retrieve it from local storage the next time it is requested.
 
 Able to download files in formats:
 
-- String
-- Image like `dart.ui`
-- Image like `package:flutter/widgets.dart`
-- File, binary data
+- `String`
+- `Image` like `dart.ui`
+- `Image` like `package:flutter/widgets.dart`
+- `File`, binary data
 
 ### How it works
 
@@ -23,26 +25,26 @@ A picture is worth a thousand words.
 
 #### Direct path to file
 
-![Direct path to file - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/direct_path_to_file.webp)]
+![Direct path to file - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/direct_path_to_file.webp)
 
 #### Direct path to file with cache
 
-![Direct path to file with cache - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/direct_path_to_file_with_cache.webp)]
+![Direct path to file with cache - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/direct_path_to_file_with_cache.webp)
 
 #### ZIP path to file
 
-![ZIP path to file - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/zip_path_to_file.webp)]
+![ZIP path to file - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/zip_path_to_file.webp)
 
 ## Getting started
 
-Add this package to `pubspec.yaml`. See `Installing` section.
+Add this package to `pubspec.yaml`. See `Installing` tab above.
 
 ## Usage
 
 Create a manager for App:
 
 ```dart
-final appCrossFileManager = CrossFileManager.create(
+final fm = CrossFileManager.create(
   loaders: const [
     PlainAssetsLoader(),
     ZipAssetsLoader(),
@@ -52,7 +54,7 @@ final appCrossFileManager = CrossFileManager.create(
 );
 ```
 
-Use in the App:
+Use the manager in the App:
 
 ```dart
 final String? r = await fm.loadString(path);
@@ -83,7 +85,7 @@ final bool r = await fm.existsInCache(path);
 ```
 
 ```dart
-/// Just add [path] to cache for fast access in the future.
+/// Just add file to cache for fast access in the future.
 await fm.warmUp(path);
 ```
 
