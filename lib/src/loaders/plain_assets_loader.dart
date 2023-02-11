@@ -6,6 +6,7 @@ import 'package:path/path.dart' as pp;
 
 import 'loader.dart';
 
+/// The loader for load and trasform data from plain assets.
 class PlainAssetsLoader extends Loader {
   const PlainAssetsLoader();
 

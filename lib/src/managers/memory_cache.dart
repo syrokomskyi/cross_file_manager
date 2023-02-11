@@ -11,8 +11,8 @@ import 'package:stash_memory/stash_memory.dart';
 abstract class BaseMemoryCache {
   late final MemoryCacheStore _store;
 
-  // \todo Define limits into the config.
-  // \todo Wrap to own Cache<T>?
+  /// \todo Define limits into the config.
+  /// \todo Wrap to own Cache<T>?
   @protected
   late final Cache<bool?> cacheExists;
 
@@ -35,6 +35,7 @@ abstract class BaseMemoryCache {
 
   bool _initOnce = false;
 
+  /// Call this method always after create any [BaseMemoryCache] object.
   Future<void> initOnce() async {
     if (_initOnce) {
       return;
@@ -75,6 +76,7 @@ abstract class BaseMemoryCache {
   Future<void> clear() async => _store.deleteAll();
 }
 
+/// Standard memory cache.
 class MemoryCache extends BaseMemoryCache {
   @override
   Future<bool?> exists(String path) async => cacheExists.get(path);
@@ -113,6 +115,7 @@ class MemoryCache extends BaseMemoryCache {
       cacheString.putIfAbsent(path, r);
 }
 
+/// Fake cache (doesn't cache anything).
 class FakeMemoryCache extends BaseMemoryCache {
   @override
   Future<bool?> exists(String path) async => null;

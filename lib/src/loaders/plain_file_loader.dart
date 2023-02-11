@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart' as widgets;
 
 import 'loader.dart';
 
+/// The loader for load and trasform data from file system.
 class PlainFileLoader extends Loader {
   const PlainFileLoader();
 

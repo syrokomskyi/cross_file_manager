@@ -7,6 +7,7 @@ import 'package:path/path.dart' as p;
 
 import 'loader.dart';
 
+/// The base loader for load and trasform data from ZIP-archives.
 abstract class ZipLoader extends Loader {
   @override
   @mustCallSuper

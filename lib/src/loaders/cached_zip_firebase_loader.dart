@@ -4,6 +4,9 @@ import 'package:path/path.dart' as p;
 
 import 'zip_firebase_loader.dart';
 
+/// The loader for load and trasform data from ZIP-archives from Firebase
+/// with caching loaded data.
+/// \warning Some files from ultra compression tools (for ex., 7Zip)
 /// doesn't extract correctly.
 class CachedZipFirebaseLoader extends ZipFirebaseLoader {
   const CachedZipFirebaseLoader();

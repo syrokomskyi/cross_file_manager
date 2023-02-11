@@ -5,6 +5,7 @@ import 'loader.dart';
 import 'plain_url_loader.dart';
 import 'zip_loader.dart';
 
+/// The loader for load and trasform data from ZIP-archives from Internet.
 class ZipUrlLoader extends ZipLoader {
   final String base;
 

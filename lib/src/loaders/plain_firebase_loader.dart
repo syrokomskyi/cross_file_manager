@@ -7,6 +7,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import 'loader.dart';
 
+/// The loader for load and trasform data from Firebase.
 class PlainFirebaseLoader extends Loader {
   const PlainFirebaseLoader();
 

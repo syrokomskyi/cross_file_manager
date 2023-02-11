@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../log.dart';
 
+/// The base class for load and transform resources to Dart & Flutter objects.
 abstract class Loader {
   final Log log;
 
@@ -34,19 +35,24 @@ abstract class Loader {
     return path;
   }
 
+  /// The cache for [Loader].
   CacheManager get cacheManager => DefaultCacheManager();
 
+  /// \return `true` then file by [path] exists.
   Future<bool> exists(String path);
 
+  /// \return `true` then file by [path] exists in cache.
   Future<bool> existsInCache(String path) async {
     assert(path.isNotEmpty);
 
     return (await cacheManager.getFileFromCache(path)) != null;
   }
 
+  /// \see [exists]
   Future<bool> notExists(String path) async => !(await exists(path));
 
-  // just touch a file by [path] for store it to cache
+  // Just touch a file by [path] for store it to cache.
+  /// \return `true` then file by [path] was found.
   Future<bool> warmUp(String path) async {
     try {
       return (await loadFile(path)) != null;
@@ -55,10 +61,13 @@ abstract class Loader {
     }
   }
 
+  /// \return [File] object by [path].
   Future<File?> loadFile(String path);
 
+  /// \return [String] by [path].
   Future<String?> loadString(String path);
 
+  /// \return [widgets.Image] object by [path].
   Future<widgets.Image?> loadImageWidget(
     String path, {
     double? width,
@@ -67,6 +76,7 @@ abstract class Loader {
     widgets.ImageErrorWidgetBuilder? errorBuilder,
   });
 
+  /// \return [ui.Image] object by [path].
   Future<ui.Image?> loadImageUi(String path) async {
     final file = await loadFile(path);
     if (file == null) {
@@ -80,6 +90,7 @@ abstract class Loader {
     return frameInfo.image;
   }
 
+  /// Clear cache for this [Loader].
   /// \see [localPath]
   /// \see [temporaryFolder]
   Future<void> clearCache() async {
@@ -91,6 +102,7 @@ abstract class Loader {
     await cacheManager.emptyCache();
   }
 
+  /// \return Converted [Uint8List] to [ui.Image].
   @protected
   static Future<ui.Image> convertBytesToImage(Uint8List bytes) {
     final completer = Completer<ui.Image>();

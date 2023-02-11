@@ -7,6 +7,7 @@ import 'package:path/path.dart' as p;
 
 import 'loader.dart';
 
+/// The loader for load and trasform data from Internet by URL.
 class PlainUrlLoader extends Loader {
   final String base;
 

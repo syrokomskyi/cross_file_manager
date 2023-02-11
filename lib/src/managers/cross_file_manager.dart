@@ -8,19 +8,26 @@ import 'package:flutter/widgets.dart' as widgets;
 import '../../cross_file_manager.dart';
 import 'memory_cache.dart';
 
+/// The file manager for load data from any resources.
+/// \see [Loader]
 /// \see [assetsCrossFileManager] and [AssetsCrossFileManager] for example.
 class CrossFileManager {
   static const defImageWidget = Icon(Icons.image, color: Colors.indigoAccent);
   static const defString = '';
 
+  /// Loaders for load data.
   final List<Loader> loaders;
+
+  /// The function for output to console.
   final Log log;
 
   /// \warning Doesn't should be singleton.
   final BaseMemoryCache memoryCache;
 
+  /// `true` if we want use a memory cache.
   final bool useMemoryCache;
 
+  /// The builder for create configured instance of [CrossFileManager].
   static Future<CrossFileManager> create({
     required List<Loader> loaders,
     bool useMemoryCache = true,
@@ -51,6 +58,8 @@ class CrossFileManager {
     log('started with `useMemoryCache` $useMemoryCache');
   }
 
+  /// \return `true` then file by [path] exists.
+  /// \see [Loader.exists]
   Future<bool> exists(String path, {List<Loader>? loaders}) async {
     if (loaders == null && useMemoryCache) {
       log('exists($path) look at into the memory cache...');
@@ -75,6 +84,7 @@ class CrossFileManager {
     return false;
   }
 
+  /// \see [Loader.existsInCache]
   /// \see [warmUp]
   Future<bool> existsInCache(String path, {List<Loader>? loaders}) async {
     if (loaders == null && useMemoryCache) {
@@ -101,6 +111,7 @@ class CrossFileManager {
   }
 
   /// Just add [path] to cache for fast access in the future.
+  /// \see [Loader.warmUp]
   /// \see [existsInCache]
   Future<bool> warmUp(String path, {List<Loader>? loaders}) async {
     for (final loader in loaders ?? this.loaders) {
@@ -115,6 +126,7 @@ class CrossFileManager {
     return false;
   }
 
+  /// \see [Loader.loadFile]
   Future<File?> loadFile(String path, {List<Loader>? loaders}) async {
     if (loaders == null && useMemoryCache) {
       log('loadFile($path) look at into the memory cache...');
@@ -138,6 +150,7 @@ class CrossFileManager {
     return null;
   }
 
+  /// \see [Loader.loadImageWidget]
   Future<widgets.Image?> loadImageWidget(
     String path, {
     List<Loader>? loaders,
@@ -174,6 +187,7 @@ class CrossFileManager {
     return null;
   }
 
+  /// \return [widgets.Image] object by [path] or [def] when image not found.
   Future<widgets.Widget> loadImageWidgetOrDefault(
     String path, {
     List<Loader>? loaders,
@@ -193,6 +207,7 @@ class CrossFileManager {
       def ??
       defImageWidget;
 
+  /// \see [Loader.loadImageUi]
   Future<ui.Image?> loadImageUi(
     String path, {
     List<Loader>? loaders,
@@ -219,6 +234,7 @@ class CrossFileManager {
     return null;
   }
 
+  /// \see [Loader.loadString]
   Future<String?> loadString(String path, {List<Loader>? loaders}) async {
     if (loaders == null && useMemoryCache) {
       log('loadString($path) look at into the memory cache...');
@@ -244,6 +260,7 @@ class CrossFileManager {
     return null;
   }
 
+  /// \return [String] by [path] or [def] then [path] not found.
   Future<String> loadStringOrDefault(
     String path, {
     List<Loader>? loaders,
@@ -251,6 +268,9 @@ class CrossFileManager {
   }) async =>
       await loadString(path, loaders: loaders) ?? def ?? defString;
 
+  /// Clear memory cache and caches of all loaders.
+  /// \see [Loader.clearCache]
+  /// \see [memoryCache]
   Future<void> clearCache() async {
     log('clearCache()...');
     await memoryCache.clear();
