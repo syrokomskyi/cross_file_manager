@@ -2,6 +2,11 @@ name: cross_file_manager
 description: Can read files from assets, Internet (by URL), zip archives by loader priority.
 homepage: https://github.com/signmotion/cross_file_manager
 
+# Format:
+#   version: major.minor.patch
+# You can calculate the number version code by this formula:
+#   code = m[A]jor * 100 * 100 + m[I]nor * 100 + [P]atch
+# Otherwise: +AAIIPP
 version: 0.4.1
 
 environment:

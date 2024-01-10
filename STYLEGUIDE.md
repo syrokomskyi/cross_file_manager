@@ -25,7 +25,7 @@ trailing comma.
 
 For the sake of example, let's use a function invocation (the same apply for all cases):
 
-```
+```dart
 // good
 foo(p1, p2, p3)
 
@@ -56,18 +56,18 @@ foo(f1,
 
 ### Imports
 
-* Never include unused or duplicated imports.
-* You must always use relative imports for imports within the CrossFileManager library
+- Never include unused or duplicated imports.
+- You must always use relative imports for imports within the `CrossFileManager` library
   (internal imports must be relative).
-* Omit `./` for relative imports from the same directory.
-* Avoid importing groups of APIs internally.
-* Order your imports by:
-    * Three main blocks, each separated by exactly one empty line:
-        * Dart SDK dependencies,
-        * External libraries/Flutter imports,
-        * Internal (same library) imports.
-    * Then, for each block, order alphabetically.
-        * For relative imports, that means further away (more `../`) imports will be first.
+- Omit `./` for relative imports from the same directory.
+- Avoid importing groups of APIs internally.
+- Order your imports by:
+  - Three main blocks, each separated by exactly one empty line:
+    - Dart SDK dependencies,
+    - External libraries/Flutter imports,
+    - Internal (same library) imports.
+  - Then, for each block, order alphabetically.
+    - For relative imports, that means further away (more `../`) imports will be first.
 
 ## Code Structure
 
@@ -81,17 +81,17 @@ Use asserts to detect contract violation.
 
 Example:
 
-````dart
+```dart
 void something(int smaller, int bigger) {
   assert(small < bigger, '`smaller` is not smaller than `bigger`');
   // ...
 }
-````
+```
 
 ## Comments
 
-* For any `//` comments, always add a space after the second slash and before the next character.
-* Use `//` (or block comments) for comments about the code; use `///` for dartdocs about APIs.
+- For any `//` comments, always add a space after the second slash and before the next character.
+- Use `//` (or block comments) for comments about the code; use `///` for dartdocs about APIs.
 
 ### TODO
 
