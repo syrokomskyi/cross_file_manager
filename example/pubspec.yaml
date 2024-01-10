@@ -8,7 +8,7 @@ publish_to: none
 
 environment:
   flutter: ">=3.10.6"
-  sdk: ">=3.0.6 <4.0.0"
+  sdk: ">=3.0.6"
 
 dependencies:
   cross_file_manager:
@@ -18,7 +18,7 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
+  flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
 
