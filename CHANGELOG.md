@@ -3,6 +3,11 @@
 All notable changes to the project `CrossFileManager` will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.1
+
+- Upgraded libraries and analysis options.
+- Corrected deprecated values.
+
 ## 0.4.0
 
 - Upgraded SDK.
