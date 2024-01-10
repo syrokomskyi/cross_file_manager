@@ -12,11 +12,11 @@ import '../log.dart';
 
 /// The base class for load and transform resources to Dart & Flutter objects.
 abstract class Loader {
-  final Log log;
-
   const Loader({
     this.log = kDebugMode ? li : liSilent,
   });
+
+  final Log log;
 
   /// Overwrite this when a custom loader using a cache.
   /// \see [clearCache]

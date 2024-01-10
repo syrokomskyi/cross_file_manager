@@ -12,6 +12,15 @@ import 'memory_cache.dart';
 /// \see [Loader]
 /// \see [assetsCrossFileManager] and [AssetsCrossFileManager] for example.
 class CrossFileManager {
+  CrossFileManager._create({
+    required this.loaders,
+    this.useMemoryCache = true,
+    this.log = kDebugMode ? li : liSilent,
+  })  : assert(loaders.isNotEmpty),
+        memoryCache = useMemoryCache ? MemoryCache() : FakeMemoryCache() {
+    log('started with `useMemoryCache` $useMemoryCache');
+  }
+
   static const defImageWidget = Icon(Icons.image, color: Colors.indigoAccent);
   static const defString = '';
 
@@ -47,15 +56,6 @@ class CrossFileManager {
     }
 
     return instance;
-  }
-
-  CrossFileManager._create({
-    required this.loaders,
-    this.useMemoryCache = true,
-    this.log = kDebugMode ? li : liSilent,
-  })  : assert(loaders.isNotEmpty),
-        memoryCache = useMemoryCache ? MemoryCache() : FakeMemoryCache() {
-    log('started with `useMemoryCache` $useMemoryCache');
   }
 
   /// \return `true` then file by [path] exists.

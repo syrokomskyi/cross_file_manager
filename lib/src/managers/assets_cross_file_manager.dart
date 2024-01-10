@@ -18,6 +18,10 @@ final assetsCrossFileManager = CrossFileManager.create(
 /// Or we can implement same manager to singleton.
 /// The file manager for load data from local assets. Variant 2 (class).
 class AssetsCrossFileManager {
+  factory AssetsCrossFileManager() => _instance;
+
+  AssetsCrossFileManager._();
+
   static final _instance = AssetsCrossFileManager._();
 
   static final crossFileManager = CrossFileManager.create(
@@ -28,10 +32,6 @@ class AssetsCrossFileManager {
     ],
     needClearCache: false,
   );
-
-  factory AssetsCrossFileManager() => _instance;
-
-  AssetsCrossFileManager._();
 
   /// \see [CrossFileManager.exists]
   Future<bool> exists(String path) async =>

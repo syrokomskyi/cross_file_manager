@@ -3,6 +3,7 @@ typedef Log = void Function(String);
 
 /// The logging to console.
 /// U+1F343
+// ignore: avoid_print
 void li(String s) => print('🍃 ${s.truncated}');
 
 /// The fake logging.

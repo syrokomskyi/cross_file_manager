@@ -7,6 +7,8 @@ import 'zip_loader.dart';
 
 /// The loader for load and trasform data from ZIP-archives from Internet.
 class ZipUrlLoader extends ZipLoader {
+  const ZipUrlLoader({required this.base}) : assert(base.length > 0);
+
   final String base;
 
   @override
@@ -17,6 +19,4 @@ class ZipUrlLoader extends ZipLoader {
   Loader get sourceLoader => PlainUrlLoader(base: base);
 
   String url(String path) => p.join(base, path);
-
-  const ZipUrlLoader({required this.base}) : assert(base.length > 0);
 }

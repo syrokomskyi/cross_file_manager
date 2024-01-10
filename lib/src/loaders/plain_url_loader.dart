@@ -9,11 +9,11 @@ import 'loader.dart';
 
 /// The loader for load and trasform data from Internet by URL.
 class PlainUrlLoader extends Loader {
+  const PlainUrlLoader({required this.base}) : assert(base.length > 0);
+
   final String base;
 
   String url(String path) => p.join(base, path);
-
-  const PlainUrlLoader({required this.base}) : assert(base.length > 0);
 
   @override
   Future<bool> exists(String path) async {

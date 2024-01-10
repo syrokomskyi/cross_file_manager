@@ -85,7 +85,7 @@ class _PageState extends State<Page> {
 
   List<Widget> subtitle(String text) => [
         Padding(padding: EdgeInsets.all(appMagicSize / 2)),
-        Text(text, textScaleFactor: 2),
+        Text(text, textScaler: const TextScaler.linear(2)),
         subtitleDivider,
       ];
 
@@ -187,7 +187,7 @@ class _PageState extends State<Page> {
     String archive = '',
   }) =>
       [
-        Text(title, textScaleFactor: 1.5),
+        Text(title, textScaler: const TextScaler.linear(1.5)),
         Text(archive.isEmpty
             ? path
             : path.replaceFirst(archive, '$archive.zip')),

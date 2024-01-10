@@ -9,14 +9,14 @@ import 'loader.dart';
 
 /// The base loader for load and trasform data from ZIP-archives.
 abstract class ZipLoader extends Loader {
+  const ZipLoader();
+
   @override
   @mustCallSuper
   String get temporaryFolder => '${super.temporaryFolder}/zip';
 
   @protected
   Loader get sourceLoader;
-
-  const ZipLoader();
 
   @override
   Future<bool> exists(String path) async {

@@ -9,6 +9,8 @@ import 'package:stash_memory/stash_memory.dart';
 /// Memorize all data which was requested and saved to local.
 /// \warning Run `initOnce()` for initialize instance.
 abstract class BaseMemoryCache {
+  BaseMemoryCache();
+
   late final MemoryCacheStore _store;
 
   /// \todo Define limits into the config.
@@ -30,8 +32,6 @@ abstract class BaseMemoryCache {
 
   @protected
   late final Cache<String?> cacheString;
-
-  BaseMemoryCache();
 
   bool _initOnce = false;
 
