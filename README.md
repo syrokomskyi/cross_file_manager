@@ -4,7 +4,7 @@ Transparent reading of files wherever they are located: assets, Internet (by URL
 
 ## Features
 
-You can choose the priority for uploaders yourself. For example, if the file is not in the assets, an attempt will be made to get the file from the cloud.
+You can choose with `Cross File Manager` the priority for uploaders yourself. For example, if the file is not in the assets, an attempt will be made to get the file from the cloud.
 
 You can develop own loader for download files from Firebase, Firestore, Amazon AWS, Google Drive, Microsoft Azure Cloud Storage, OneDrive, Dropbox, etc. - any data source can be included in the CrossFileManager. See `class Loader` and [already implemented loaders](https://github.com/signmotion/cross_file_manager/tree/master/lib/src/loaders).
 
@@ -20,8 +20,6 @@ Able to download files in formats:
 - `File`, binary data
 
 ### How it works
-
-A picture is worth a thousand words.
 
 #### Direct path to file
 
@@ -102,4 +100,5 @@ See `example/main.dart` for more use cases:
 
 ## TODO
 
+- Separate the package to work with pure Dart.
 - ? Replace `File` to `XFile`. <https://pub.dev/packages/cross_file>
