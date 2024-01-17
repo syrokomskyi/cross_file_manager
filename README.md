@@ -99,3 +99,7 @@ It will return the first file found.
 See `example/main.dart` for more use cases:
 
 [![Example App with CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/zip_assets_demo.webp)](https://github.com/signmotion/cross_file_manager/tree/master/example)
+
+## TODO
+
+- ? Replace `File` to `XFile`. <https://pub.dev/packages/cross_file>
