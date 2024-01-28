@@ -315,18 +315,18 @@ packages:
     dependency: transitive
     description:
       name: sqflite
-      sha256: "591f1602816e9c31377d5f008c2d9ef7b8aca8941c3f89cc5fd9d84da0c38a9a"
+      sha256: a9016f495c927cb90557c909ff26a6d92d9bd54fc42ba92e19d4e79d61e798c6
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0"
+    version: "2.3.2"
   sqflite_common:
     dependency: transitive
     description:
       name: sqflite_common
-      sha256: bb4738f15b23352822f4c42a531677e5c6f522e079461fd240ead29d8d8a54a6
+      sha256: "28d8c66baee4968519fb8bd6cdbedad982d6e53359091f0b74544a9f32ec72d5"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.0+2"
+    version: "2.5.3"
   stack_trace:
     dependency: transitive
     description:
@@ -339,18 +339,18 @@ packages:
     dependency: transitive
     description:
       name: stash
-      sha256: "4858c547ba49cfd9a1964ff19cc087c682f20537147bad59ec54932d01de6a49"
+      sha256: "5d42c73727336e9ea8cef3b028355fc4728b4cdad643444d74e432d0289cdb7d"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.3"
+    version: "5.1.0"
   stash_memory:
     dependency: transitive
     description:
       name: stash_memory
-      sha256: b4c910707bc9c4b1dd5aa4825c8ad9094c1613844f21ca38b2b9dab5325c6a5e
+      sha256: afe41cf5385204d6f6f0909988f6210f774bf43836535d6962c9f483d43233e0
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.3"
+    version: "5.1.0"
   stream_channel:
     dependency: transitive
     description:
@@ -441,4 +441,4 @@ packages:
     version: "1.0.4"
 sdks:
   dart: ">=3.2.0 <4.0.0"
-  flutter: ">=3.10.6"
+  flutter: ">=3.10.0"
