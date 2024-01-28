@@ -14,7 +14,7 @@ topics:
 # You can calculate the number version code by this formula:
 #   code = m[A]jor * 100 * 100 + m[I]nor * 100 + [P]atch
 # Otherwise: +AAIIPP
-version: 0.4.2
+version: 0.4.3
 
 environment:
   flutter: ">=3.0.0 <4.0.0"

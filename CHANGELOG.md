@@ -3,9 +3,14 @@
 All notable changes to the project `CrossFileManager` will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.3
+
+- Added a cover to `README`.
+- Upgraded dependencies.
+
 ## 0.4.2
 
-- Updated README.
+- Updated `README`.
 
 ## 0.4.1
 
@@ -18,7 +23,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.3.1
 
-- Added documentations.
+- Added documentation.
 
 ## 0.3.0
 
@@ -30,10 +35,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.2.0
 
-- Added PlainFileLoader and ZipFileLoader.
+- Added `PlainFileLoader` and `ZipFileLoader`.
 - Implemented a load image into the format dart:ui.
 - Fixed error when set `clear cache` option.
-- Refactoring MemoryCache.
+- Refactoring `MemoryCache`.
 - Upgraded dependencies.
 
 ## 0.1.0
