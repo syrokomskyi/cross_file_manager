@@ -1,12 +1,14 @@
-# CrossFileManager
+# Cross File Manager
 
-Transparent reading of files wherever they are located: assets, Internet (by URL), zip archives.
+![Cover - Cross File Manager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/cover.webp)
+
+Transparent reading of files from Flutter assets, Internet (by URL), zip archives by uploader priority.
 
 ## Features
 
-You can choose with `Cross File Manager` the priority for uploaders yourself. For example, if the file is not in the assets, an attempt will be made to get the file from the cloud.
+We can choose with `Cross File Manager` the priority for uploaders yourself. For example, if the file is not in the assets, an attempt will be made to get the file from the cloud.
 
-You can develop own loader for download files from Firebase, Firestore, Amazon AWS, Google Drive, Microsoft Azure Cloud Storage, OneDrive, Dropbox, etc. - any data source can be included in the CrossFileManager. See `class Loader` and [already implemented loaders](https://github.com/signmotion/cross_file_manager/tree/master/lib/src/loaders).
+Can develop own loader for download files from Firebase, Firestore, Amazon AWS, Google Drive, Microsoft Azure Cloud Storage, OneDrive, Dropbox, etc. - any data source can be included in the CrossFileManager. See `class Loader` and [already implemented loaders](https://github.com/signmotion/cross_file_manager/tree/master/lib/src/loaders).
 
 Can retrieve the needed file from an archive. It comes in handy when you need to download thousands of small files.
 
@@ -98,7 +100,11 @@ See `example/main.dart` for more use cases:
 
 [![Example App with CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/zip_assets_demo.webp)](https://github.com/signmotion/cross_file_manager/tree/master/example)
 
+## License
+
+[MIT](LICENSE)
+
 ## TODO
 
 - Separate the package to work with pure Dart.
-- ? Replace `File` to `XFile`. <https://pub.dev/packages/cross_file>
+- Replace `File` to `WFile`. <https://pub.dev/packages/wfile>
