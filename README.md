@@ -2,11 +2,14 @@
 
 ![Cover - Cross File Manager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/cover.webp)
 
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/signmotion/id_gen/master/LICENSE)
+
 Transparent reading of files from Flutter assets, Internet (by URL), zip archives by uploader priority.
+The easy-to-use package.
 
 ## Features
 
-We can choose with `Cross File Manager` the priority for uploaders yourself. For example, if the file is not in the assets, an attempt will be made to get the file from the cloud.
+We can choose with `CrossFileManager` the priority for uploaders yourself. For example, if the file is not in the assets, an attempt will be made to get the file from the cloud.
 
 Can develop own loader for download files from Firebase, Firestore, Amazon AWS, Google Drive, Microsoft Azure Cloud Storage, OneDrive, Dropbox, etc. - any data source can be included in the CrossFileManager. See `class Loader` and [already implemented loaders](https://github.com/signmotion/cross_file_manager/tree/master/lib/src/loaders).
 
@@ -23,17 +26,7 @@ Able to download files in formats:
 
 ### How it works
 
-#### Direct path to file
-
-![Direct path to file - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/direct_path_to_file.webp)
-
-#### Direct path to file with cache
-
-![Direct path to file with cache - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/direct_path_to_file_with_cache.webp)
-
-#### ZIP path to file
-
-![ZIP path to file - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/zip_path_to_file.webp)
+![Direct path to file - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/request_response.webp)
 
 ## Getting started
 
@@ -100,9 +93,14 @@ See `example/main.dart` for more use cases:
 
 [![Example App with CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/zip_assets_demo.webp)](https://github.com/signmotion/cross_file_manager/tree/master/example)
 
-## License
+## Welcome
 
-[MIT](LICENSE)
+This package is open-source, stable and well-tested. Development happens on
+[GitHub](https://github.com/signmotion/cross_file_manager). Feel free to report issues
+or create a pull-request there.
+
+General questions are best asked on
+[StackOverflow](https://stackoverflow.com/questions/tagged/cross_file_manager).
 
 ## TODO
 
