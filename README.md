@@ -28,13 +28,9 @@ Able to download files in formats:
 
 ![Direct path to file - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/request_response.webp)
 
-## Getting started
-
-Add this package to `pubspec.yaml`. See `Installing` tab above.
-
 ## Usage
 
-Create a manager for App:
+### Create a Manager for App
 
 ```dart
 final fm = CrossFileManager.create(
@@ -47,10 +43,14 @@ final fm = CrossFileManager.create(
 );
 ```
 
-Use the manager in the App:
+### Use the Manager in App
 
 ```dart
-final String? r = await fm.loadString(path);
+final r = await fm.loadString(path);
+```
+
+```dart
+final r = await fm.loadFile(path);
 ```
 
 ```dart
@@ -62,23 +62,19 @@ final ui.Image? r = await fm.loadImageUi(path);
 ```dart
 import 'package:flutter/widgets.dart' as widgets;
 
-final widgets.Image? r = await fm.loadImageWidget(path);
+final r = await fm.loadImageWidget(path);
 ```
 
 ```dart
-final File? r = await fm.loadFile(path);
+final r = await fm.exists(path);
 ```
 
 ```dart
-final bool r = await fm.exists(path);
+final r = await fm.existsInCache(path);
 ```
 
 ```dart
-final bool r = await fm.existsInCache(path);
-```
-
-```dart
-/// Just add file to cache for fast access in the future.
+// Just add a file to cache for fast access in the future.
 await fm.warmUp(path);
 ```
 
