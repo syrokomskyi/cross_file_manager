@@ -4,7 +4,7 @@
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Pub Package](https://img.shields.io/badge/doc-cross_file_manager-blue)](https://pub.dartlang.org/packages/cross_file_manager)
-[![Build Status](https://github.com/signmotion/cross_file_manager/actions/workflows/dart-ci.yml/badge.svg)](https://github.com/signmotion/cross_file_manager/actions/workflows/flutter-ci.yml)
+[![Build Status](https://github.com/signmotion/cross_file_manager/actions/workflows/flutter-ci.yml/badge.svg)](https://github.com/signmotion/cross_file_manager/actions/workflows/flutter-ci.yml)
 [![Publisher](https://img.shields.io/pub/publisher/cross_file_manager)](https://pub.dev/publishers/syrokomskyi.com)
 
 Transparent reading of files from Flutter assets, Internet (by URL), zip archives by uploader priority.
