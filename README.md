@@ -2,10 +2,14 @@
 
 ![Cover - Cross File Manager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/cover.webp)
 
-[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/signmotion/id_gen/master/LICENSE)
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Pub Package](https://img.shields.io/badge/doc-cross_file_manager-blue)](https://pub.dartlang.org/packages/cross_file_manager)
+[![Build Status](https://github.com/signmotion/cross_file_manager/actions/workflows/dart-ci.yml/badge.svg)](https://github.com/signmotion/cross_file_manager/actions/workflows/dart-ci.yml)
+[![Publisher](https://img.shields.io/pub/publisher/cross_file_manager)](https://pub.dev/publishers/syrokomskyi.com)
 
 Transparent reading of files from Flutter assets, Internet (by URL), zip archives by uploader priority.
 The easy-to-use package.
+Feel free to use it in your awesome project.
 
 ## Features
 
@@ -54,14 +58,10 @@ final r = await fm.loadFile(path);
 ```
 
 ```dart
-import 'dart:ui' as ui;
-
-final ui.Image? r = await fm.loadImageUi(path);
+final r = await fm.loadImageUi(path);
 ```
 
 ```dart
-import 'package:flutter/widgets.dart' as widgets;
-
 final r = await fm.loadImageWidget(path);
 ```
 
@@ -90,6 +90,8 @@ See `example/main.dart` for more use cases:
 [![Example App with CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/zip_assets_demo.webp)](https://github.com/signmotion/cross_file_manager/tree/master/example)
 
 ## Welcome
+
+Requests and suggestions are warmly welcome.
 
 This package is open-source, stable and well-tested. Development happens on
 [GitHub](https://github.com/signmotion/cross_file_manager). Feel free to report issues
