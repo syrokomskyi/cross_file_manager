@@ -1,3 +1,8 @@
+import 'package:test/test.dart';
+
 void main() {
-  /// See `example`.
+  test('test', () {
+    /// See `example`
+    expect(true, isTrue);
+  });
 }
