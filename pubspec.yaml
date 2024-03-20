@@ -35,3 +35,7 @@ dev_dependencies:
   flutter_lints: ^3.0.1
   lints: ^3.0.0
   test: ^1.25.2
+
+screenshots:
+  - description: "CrossFileManager demo"
+    path: images/screenshots/zip_url_demo.webp
