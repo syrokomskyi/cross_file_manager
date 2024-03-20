@@ -6,6 +6,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## 0.4.5
 
 - Added CI.
+- Included screenshots.
 - Provided badges to `README`.
 
 ## 0.4.4
