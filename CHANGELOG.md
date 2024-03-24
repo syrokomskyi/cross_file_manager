@@ -3,6 +3,11 @@
 All notable changes to the project `CrossFileManager` will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.8
+
+- Enhanced image representations in `README`.
+- Provided more badges to `README`.
+
 ## 0.4.7
 
 - Added CI.
