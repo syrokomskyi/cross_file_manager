@@ -92,7 +92,7 @@ It will return the first file found.
 
 See `example/main.dart` for more use cases:
 
-[<img src="https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/zip_assets_demo.webp" width="600"/>]((<https://github.com/signmotion/cross_file_manager/tree/master/example>)
+[<img src="https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/screenshots/zip_assets_demo.webp" width="600"/>](https://github.com/signmotion/cross_file_manager/tree/master/example)
 
 ## Welcome
 
