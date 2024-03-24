@@ -3,9 +3,14 @@
 ![Cover - Cross File Manager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/cover.webp)
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Pub Package](https://img.shields.io/badge/doc-cross_file_manager-blue)](https://pub.dartlang.org/packages/cross_file_manager)
-[![Build Status](https://github.com/signmotion/cross_file_manager/actions/workflows/flutter-ci.yml/badge.svg)](https://github.com/signmotion/cross_file_manager/actions/workflows/flutter-ci.yml)
+[![Pub Package](https://img.shields.io/pub/v/cross_file_manager.svg?logo=dart&logoColor=00b9fc&color=blue)](https://pub.dartlang.org/packages/cross_file_manager)
+[![Code Size](https://img.shields.io/github/languages/code-size/signmotion/cross_file_manager?logo=github&logoColor=white)](https://github.com/signmotion/cross_file_manager)
 [![Publisher](https://img.shields.io/pub/publisher/cross_file_manager)](https://pub.dev/publishers/syrokomskyi.com)
+
+[![Build Status](https://img.shields.io/github/actions/workflow/status/signmotion/cross_file_manager/dart-ci.yml?logo=github-actions&logoColor=white)](https://github.com/signmotion/cross_file_manager/actions)
+[![Pull Requests](https://img.shields.io/github/issues-pr/signmotion/cross_file_manager?logo=github&logoColor=white)](https://github.com/signmotion/cross_file_manager/pulls)
+[![Issues](https://img.shields.io/github/issues/signmotion/cross_file_manager?logo=github&logoColor=white)](https://github.com/signmotion/cross_file_manager/issues)
+[![Pub Score](https://img.shields.io/pub/points/cross_file_manager?logo=dart&logoColor=00b9fc)](https://pub.dev/packages/cross_file_manager/score)
 
 Transparent reading of files from Flutter assets, Internet (by URL), zip archives by uploader priority.
 The easy-to-use package.
@@ -30,7 +35,7 @@ Able to download files in formats:
 
 ### How it works
 
-![Direct path to file - CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/request_response.webp)
+[<img src="https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/request_response.webp" width="600"/>](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/request_response.webp)
 
 ## Usage
 
@@ -87,7 +92,7 @@ It will return the first file found.
 
 See `example/main.dart` for more use cases:
 
-[![Example App with CrossFileManager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/zip_assets_demo.webp)](https://github.com/signmotion/cross_file_manager/tree/master/example)
+[<img src="https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/zip_assets_demo.webp" width="600"/>]((<https://github.com/signmotion/cross_file_manager/tree/master/example>)
 
 ## Welcome
 
