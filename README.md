@@ -104,6 +104,10 @@ See `example/main.dart` for more use cases:
 
 [<img src="https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/screenshots/zip_assets_demo.webp" width="600"/>](https://github.com/signmotion/cross_file_manager/tree/master/example)
 
+## Whats New
+
+Look at [changelog](https://pub.dev/packages/id_gen/changelog).
+
 ## Welcome
 
 Requests and suggestions are warmly welcome.
