@@ -3,6 +3,13 @@
 All notable changes to the project `CrossFileManager` will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.9
+
+- Added a link to [CodeTriangle](https://codetriage.com) in `README`.
+- Provided CodeFactor badge in `README`.
+- Added emojis to **Usage** and **Welcome** sections in `README`.
+- Changed a representation of supported platforms and SDKs in `README`.
+
 ## 0.4.8
 
 - Enhanced image representations in `README`.
