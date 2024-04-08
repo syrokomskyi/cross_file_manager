@@ -11,7 +11,7 @@
 ![Supported platforms](https://badgen.net/pub/flutter-platform/cross_file_manager)
 ![Supported SDKs](https://badgen.net/pub/dart-platform/cross_file_manager)
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/signmotion/cross_file_manager/dart-ci.yml?logo=github-actions&logoColor=white)](https://github.com/signmotion/cross_file_manager/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/signmotion/cross_file_manager/flutter-ci.yml?logo=github-actions&logoColor=white)](https://github.com/signmotion/cross_file_manager/actions)
 [![Pull Requests](https://img.shields.io/github/issues-pr/signmotion/cross_file_manager?logo=github&logoColor=white)](https://github.com/signmotion/cross_file_manager/pulls)
 [![Issues](https://img.shields.io/github/issues/signmotion/cross_file_manager?logo=github&logoColor=white)](https://github.com/signmotion/cross_file_manager/issues)
 [![Pub Score](https://img.shields.io/pub/points/cross_file_manager?logo=dart&logoColor=00b9fc)](https://pub.dev/packages/cross_file_manager/score)
