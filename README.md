@@ -17,7 +17,7 @@
 [![Pub Score](https://img.shields.io/pub/points/id_gen?logo=dart&logoColor=00b9fc)](https://pub.dev/packages/id_gen/score)
 
 Transparent reading of files from Flutter assets, Internet (by URL), zip archives by uploader priority.
-The easy-to-use package.
+The easy-to-use and [well-tested](https://github.com/signmotion/id_gen/tree/master/test) package.
 Feel free to use it in your awesome project.
 
 ## Features
