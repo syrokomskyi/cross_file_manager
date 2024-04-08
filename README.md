@@ -146,4 +146,6 @@ Once you start using the **IdGen**, it will become easy to choose the functional
 - Replace `File` to `WFile`. <https://pub.dev/packages/wfile>
 - Change chunks of code for transform images to [flutter_image_converter](https://pub.dartlang.org/packages/flutter_image_converter).
 
+It's just a habit of mine: writing down ideas that come to mind while working on a project. I confess that I rarely return to these notes. But now, hopefully, even if you don't have an idea yet, the above notes will help you choose the suitable "feature" and become a contributor to the open-source community.
+
 Created [with ❤️](https://syrokomskyi.com)
