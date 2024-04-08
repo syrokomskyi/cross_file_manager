@@ -3,28 +3,28 @@
 ![Cover - Cross File Manager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/cover.webp)
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Pub Package](https://img.shields.io/pub/v/id_gen.svg?logo=dart&logoColor=00b9fc&color=blue)](https://pub.dartlang.org/packages/id_gen)
-[![Code Size](https://img.shields.io/github/languages/code-size/signmotion/id_gen?logo=github&logoColor=white)](https://github.com/signmotion/id_gen)
-[![Publisher](https://img.shields.io/pub/publisher/id_gen)](https://pub.dev/publishers/syrokomskyi.com)
+[![Pub Package](https://img.shields.io/pub/v/cross_file_manager.svg?logo=dart&logoColor=00b9fc&color=blue)](https://pub.dartlang.org/packages/cross_file_manager)
+[![Code Size](https://img.shields.io/github/languages/code-size/signmotion/cross_file_manager?logo=github&logoColor=white)](https://github.com/signmotion/cross_file_manager)
+[![Publisher](https://img.shields.io/pub/publisher/cross_file_manager)](https://pub.dev/publishers/syrokomskyi.com)
 
-![SDK version](https://badgen.net/pub/sdk-version/id_gen)
-![Supported platforms](https://badgen.net/pub/flutter-platform/id_gen)
-![Supported SDKs](https://badgen.net/pub/dart-platform/id_gen)
+![SDK version](https://badgen.net/pub/sdk-version/cross_file_manager)
+![Supported platforms](https://badgen.net/pub/flutter-platform/cross_file_manager)
+![Supported SDKs](https://badgen.net/pub/dart-platform/cross_file_manager)
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/signmotion/id_gen/dart-ci.yml?logo=github-actions&logoColor=white)](https://github.com/signmotion/id_gen/actions)
-[![Pull Requests](https://img.shields.io/github/issues-pr/signmotion/id_gen?logo=github&logoColor=white)](https://github.com/signmotion/id_gen/pulls)
-[![Issues](https://img.shields.io/github/issues/signmotion/id_gen?logo=github&logoColor=white)](https://github.com/signmotion/id_gen/issues)
-[![Pub Score](https://img.shields.io/pub/points/id_gen?logo=dart&logoColor=00b9fc)](https://pub.dev/packages/id_gen/score)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/signmotion/cross_file_manager/dart-ci.yml?logo=github-actions&logoColor=white)](https://github.com/signmotion/cross_file_manager/actions)
+[![Pull Requests](https://img.shields.io/github/issues-pr/signmotion/cross_file_manager?logo=github&logoColor=white)](https://github.com/signmotion/cross_file_manager/pulls)
+[![Issues](https://img.shields.io/github/issues/signmotion/cross_file_manager?logo=github&logoColor=white)](https://github.com/signmotion/cross_file_manager/issues)
+[![Pub Score](https://img.shields.io/pub/points/cross_file_manager?logo=dart&logoColor=00b9fc)](https://pub.dev/packages/cross_file_manager/score)
 
 Transparent reading of files from Flutter assets, Internet (by URL), zip archives by uploader priority.
-The easy-to-use and [well-tested](https://github.com/signmotion/id_gen/tree/master/test) package.
+The easy-to-use and [well-tested](https://github.com/signmotion/cross_file_manager/tree/master/test) package.
 Feel free to use it in your awesome project.
 
-[![CodeFactor](https://codefactor.io/repository/github/signmotion/id_gen/badge)](https://codefactor.io/repository/github/signmotion/id_gen)
+[![CodeFactor](https://codefactor.io/repository/github/signmotion/cross_file_manager/badge)](https://codefactor.io/repository/github/signmotion/cross_file_manager)
 
 Share some ❤️ and star repo to support the project.
 
-_If you write an article about **IdGen** or any of [these](https://pub.dev/packages?q=publisher%3Asyrokomskyi.com&sort=updated) packages, let me know and I'll post the URL of the article in the **README** 🤝_
+_If you write an article about **CrossFileManager** or any of [these](https://pub.dev/packages?q=publisher%3Asyrokomskyi.com&sort=updated) packages, let me know and I'll post the URL of the article in the **README** 🤝_
 
 ## Features
 
@@ -106,7 +106,7 @@ See `example/main.dart` for more use cases:
 
 ## Whats New
 
-Look at [changelog](https://pub.dev/packages/id_gen/changelog).
+Look at [changelog](https://pub.dev/packages/cross_file_manager/changelog).
 
 ## 🙋‍♀️🙋‍♂️Welcome
 
@@ -121,12 +121,12 @@ If this is your first contribution, I'll leave you with some of the best links I
 - [Summer Guide from Google](https://youtu.be/qGTQ7dEZXZc).
 - [CodeTriangle](https://codetriage.com) Free community tools for contributing to Open Source projects.
 
-The package **IdGen** is open-source, stable and well-tested. Development happens on
-[GitHub](https://github.com/signmotion/id_gen). Feel free to report issues
+The package **CrossFileManager** is open-source, stable and well-tested. Development happens on
+[GitHub](https://github.com/signmotion/cross_file_manager). Feel free to report issues
 or create a pull-request there.
 
 General questions are best asked on
-[StackOverflow](https://stackoverflow.com/questions/tagged/id_gen).
+[StackOverflow](https://stackoverflow.com/questions/tagged/cross_file_manager).
 
 And here is a curated list of how you can help:
 
@@ -140,7 +140,7 @@ And here is a curated list of how you can help:
 
 ## 🕧TODO (perhaps)
 
-Once you start using the **IdGen**, it will become easy to choose the functionality to contribute. But if you already get everything you need from this package but have some free time, let me write here what I have planned:
+Once you start using the **CrossFileManager**, it will become easy to choose the functionality to contribute. But if you already get everything you need from this package but have some free time, let me write here what I have planned:
 
 - Separate the package to work with pure Dart.
 - Replace `File` to `WFile`. <https://pub.dev/packages/wfile>
