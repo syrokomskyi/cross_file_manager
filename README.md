@@ -24,7 +24,7 @@ Feel free to use it in your awesome project.
 
 Share some ❤️ and star repo to support the project.
 
-_If you write an article about **CrossFileManager** or any of [these](https://pub.dev/packages?q=publisher%3Asyrokomskyi.com&sort=updated) packages, let me know and I'll post the URL of the article in the **README** 🤝_
+_If you write an article about **CrossFileManager** or any of [these](https://pub.dev/packages?q=publisher%3Asyrokomskyi.com&sort=updated) packages, let me know and I'll post the URL of the article in the **README**_ 🤝
 
 ## Features
 
@@ -104,13 +104,13 @@ See `example/main.dart` for more use cases:
 
 [<img src="https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/screenshots/zip_assets_demo.webp" width="600"/>](https://github.com/signmotion/cross_file_manager/tree/master/example)
 
-## Whats New
+## 👁️What's New
 
 Look at [changelog](https://pub.dev/packages/cross_file_manager/changelog).
 
 ## 🙋‍♀️🙋‍♂️Welcome
 
-Requests and suggestions are warmly welcome.
+If you encounter any problems, feel free to [open an issue](https://github.com/signmotion/cross_file_manager/issues). If you feel the package is missing a feature, please [raise a ticket](https://github.com/signmotion/cross_file_manager/issues) on Github and I'll look into it. Requests and suggestions are warmly welcome. Danke!
 
 Contributions are what make the open-source community such a great place to learn, create, take a new skills, and be inspired.
 
@@ -119,7 +119,7 @@ If this is your first contribution, I'll leave you with some of the best links I
 - [Guide to Making a First Contribution](https://github.com/firstcontributions/first-contributions). You will find the guide in your native language.
 - [How to Contribute to Open Source](https://opensource.guide/how-to-contribute). Longread for deep diving for first-timers and for veterans.
 - [Summer Guide from Google](https://youtu.be/qGTQ7dEZXZc).
-- [CodeTriangle](https://codetriage.com) Free community tools for contributing to Open Source projects.
+- [CodeTriangle](https://codetriage.com). Free community tools for contributing to Open Source projects.
 
 The package **CrossFileManager** is open-source, stable and well-tested. Development happens on
 [GitHub](https://github.com/signmotion/cross_file_manager). Feel free to report issues
@@ -136,7 +136,7 @@ And here is a curated list of how you can help:
 - Sharing your examples. If you've experimented with our use cases or have crafted some examples of your own, feel free to add them to the `example` directory. Your practical insights can enrich our resource pool.
 - Fix typos/grammar mistakes.
 - Report bugs and scenarios that are difficult to implement.
-- Implement new features by making a pull-request (look below).
+- Implement new features by making a pull-request.
 
 ## 🕧TODO (perhaps)
 
