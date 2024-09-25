@@ -1,32 +1,32 @@
 # Cross File Manager
 
+![SDK version](https://badgen.net/pub/sdk-version/cross_file_manager?style=for-the-badge)
+![Supported platforms](https://badgen.net/pub/flutter-platform/cross_file_manager?style=for-the-badge)
+![Supported SDKs](https://badgen.net/pub/dart-platform/cross_file_manager?style=for-the-badge)
+
 ![Cover - Cross File Manager](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/cover.webp)
 
-[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Pub Package](https://img.shields.io/pub/v/cross_file_manager.svg?logo=dart&logoColor=00b9fc&color=blue)](https://pub.dartlang.org/packages/cross_file_manager)
-[![Code Size](https://img.shields.io/github/languages/code-size/signmotion/cross_file_manager?logo=github&logoColor=white)](https://github.com/signmotion/cross_file_manager)
-[![Publisher](https://img.shields.io/pub/publisher/cross_file_manager)](https://pub.dev/publishers/syrokomskyi.com)
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Pub Package](https://img.shields.io/pub/v/cross_file_manager.svg?logo=dart&logoColor=00b9fc&color=blue&style=for-the-badge)](https://pub.dartlang.org/packages/cross_file_manager)
+[![Code Size](https://img.shields.io/github/languages/code-size/signmotion/cross_file_manager?logo=github&logoColor=white&style=for-the-badge)](https://github.com/signmotion/cross_file_manager)
+[![Publisher](https://img.shields.io/pub/publisher/cross_file_manager?style=for-the-badge)](https://pub.dev/publishers/syrokomskyi.com)
 
-![SDK version](https://badgen.net/pub/sdk-version/cross_file_manager)
-![Supported platforms](https://badgen.net/pub/flutter-platform/cross_file_manager)
-![Supported SDKs](https://badgen.net/pub/dart-platform/cross_file_manager)
-
-[![Build Status](https://img.shields.io/github/actions/workflow/status/signmotion/cross_file_manager/flutter-ci.yml?logo=github-actions&logoColor=white)](https://github.com/signmotion/cross_file_manager/actions)
-[![Pull Requests](https://img.shields.io/github/issues-pr/signmotion/cross_file_manager?logo=github&logoColor=white)](https://github.com/signmotion/cross_file_manager/pulls)
-[![Issues](https://img.shields.io/github/issues/signmotion/cross_file_manager?logo=github&logoColor=white)](https://github.com/signmotion/cross_file_manager/issues)
-[![Pub Score](https://img.shields.io/pub/points/cross_file_manager?logo=dart&logoColor=00b9fc)](https://pub.dev/packages/cross_file_manager/score)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/signmotion/cross_file_manager/flutter-ci.yml?logo=github-actions&logoColor=white&style=for-the-badge)](https://github.com/signmotion/cross_file_manager/actions)
+[![Pull Requests](https://img.shields.io/github/issues-pr/signmotion/cross_file_manager?logo=github&logoColor=white&style=for-the-badge)](https://github.com/signmotion/cross_file_manager/pulls)
+[![Issues](https://img.shields.io/github/issues/signmotion/cross_file_manager?logo=github&logoColor=white&style=for-the-badge)](https://github.com/signmotion/cross_file_manager/issues)
+[![Pub Score](https://img.shields.io/pub/points/cross_file_manager?logo=dart&logoColor=00b9fc&style=for-the-badge)](https://pub.dev/packages/cross_file_manager/score)
 
 Transparent reading of files from Flutter assets, Internet (by URL), zip archives by uploader priority.
 The easy-to-use and [well-tested](https://github.com/signmotion/cross_file_manager/tree/master/test) package.
 Feel free to use it in your awesome project.
 
-[![CodeFactor](https://codefactor.io/repository/github/signmotion/cross_file_manager/badge)](https://codefactor.io/repository/github/signmotion/cross_file_manager)
+[![CodeFactor](https://codefactor.io/repository/github/signmotion/cross_file_manager/badge?style=for-the-badge)](https://codefactor.io/repository/github/signmotion/cross_file_manager)
 
-Share some ❤️ and star repo to support the project.
+Share some ❤️ and star repo to support the [Cross File Manager](https://github.com/signmotion/cross_file_manager).
 
 _If you write an article about **CrossFileManager** or any of [these](https://pub.dev/packages?q=publisher%3Asyrokomskyi.com&sort=updated) packages, let me know and I'll post the URL of the article in the **README**_ 🤝
 
-## Features
+## 🌟 Features
 
 We can choose with **CrossFileManager** the priority for uploaders yourself. For example, if the file is not in the assets, an attempt will be made to get the file from the cloud.
 
@@ -47,7 +47,7 @@ Able to download files in formats:
 
 [<img src="https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/request_response.webp" width="600"/>](https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/request_response.webp)
 
-## Usage
+## 🚀 Usage
 
 ### Create a Manager for App
 
@@ -104,11 +104,11 @@ See `example/main.dart` for more use cases:
 
 [<img src="https://raw.githubusercontent.com/signmotion/cross_file_manager/master/images/screenshots/zip_assets_demo.webp" width="600"/>](https://github.com/signmotion/cross_file_manager/tree/master/example)
 
-## 👁️What's New
+## ✨ What's New
 
 Look at [changelog](https://pub.dev/packages/cross_file_manager/changelog).
 
-## 🙋‍♀️🙋‍♂️Welcome
+## 👋 Welcome
 
 If you encounter any problems, feel free to [open an issue](https://github.com/signmotion/cross_file_manager/issues). If you feel the package is missing a feature, please [raise a ticket](https://github.com/signmotion/cross_file_manager/issues) on Github and I'll look into it. Requests and suggestions are warmly welcome. Danke!
 
@@ -138,7 +138,7 @@ And here is a curated list of how you can help:
 - Report bugs and scenarios that are difficult to implement.
 - Implement new features by making a pull-request.
 
-## 🕧TODO (perhaps)
+## ✅ TODO (perhaps)
 
 Once you start using the **CrossFileManager**, it will become easy to choose the functionality to contribute. But if you already get everything you need from this package but have some free time, let me write here what I have planned:
 
@@ -148,4 +148,8 @@ Once you start using the **CrossFileManager**, it will become easy to choose the
 
 It's just a habit of mine: writing down ideas that come to mind while working on a project. I confess that I rarely return to these notes. But now, hopefully, even if you don't have an idea yet, the above notes will help you choose the suitable "feature" and become a contributor to the open-source community.
 
-Created [with ❤️](https://syrokomskyi.com)
+Ready [for 🪙](https://webduet.de "The Modern Planet-Scale Site for Your Ambitions")
+
+Created [with ❤️](https://syrokomskyi.com "Andrii Syrokomskyi")
+
+[![fresher](https://img.shields.io/badge/maintained%20using-fresher-darkgreen.svg?style=for-the-badge)](https://github.com/signmotion/fresher "Keeps Projects Up to Date")
