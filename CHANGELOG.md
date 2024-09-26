@@ -3,6 +3,12 @@
 All notable changes to the project `CrossFileManager` will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.12
+
+- Provided a link to [webduet.de](https://webduet.de "The Modern Planet-Scale Site for Your Ambitions") into `README`.
+- Enhanced [Fresher's badge](https://github.com/signmotion/fresher).
+- Upgraded dependencies.
+
 ## 0.4.11
 
 - Enhanced `README`: added an opening speech in Welcome section, What's New section, shorted sentences, added a link to [CodeTriangle](https://codetriage.com), replaced badges with supported platforms to <https://badgen.net/pub>, etc.
